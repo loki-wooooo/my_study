@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>kr.co.myservice</groupId>
 	<artifactId>my-restful-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>my-restful-service</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
