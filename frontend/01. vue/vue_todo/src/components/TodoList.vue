@@ -1,8 +1,14 @@
 <template>
     <div>
         <transition-group name="list" tag="ul">
+<!--            <li-->
+<!--                v-for="(todoItem, index) in this.$props.propsdata"-->
+<!--                v-bind:key="todoItem.item"-->
+<!--                class="shadow"-->
+<!--            >-->
+            <!-- vuex store로 변경처리 -->
             <li
-                v-for="(todoItem, index) in this.$props.propsdata"
+                v-for="(todoItem, index) in this.$store.state.todoItems"
                 v-bind:key="todoItem.item"
                 class="shadow"
             >
