@@ -1,22 +1,23 @@
 package kr.co.myservice.myrestfulservice.bean;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonFilter;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 /**
  * @JsonIgnore - field
  * @JsonIgnoreProperties - class 단위
- * */
+ */
 @Data
 @AllArgsConstructor
-@JsonIgnoreProperties(value = {"password","ssn"})
-public class User {
+@NoArgsConstructor
+@JsonFilter("UserInfo")
+public class AdminUser {
 
     private Integer id;
 
@@ -27,11 +28,7 @@ public class User {
     @Past(message = "등록일은 미래 날짜를 입력하실 수 없습니다.")
     private Date joinDate;
 
-    // response data를 보내주지 않겠다는 명시
-//    @JsonIgnore
     private String password;
-
-//    @JsonIgnore
     private String ssn;
 
 }
