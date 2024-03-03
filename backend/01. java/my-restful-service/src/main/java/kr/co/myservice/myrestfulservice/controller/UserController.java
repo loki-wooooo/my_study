@@ -1,5 +1,6 @@
 package kr.co.myservice.myrestfulservice.controller;
 
+import jakarta.validation.Valid;
 import kr.co.myservice.myrestfulservice.bean.User;
 import kr.co.myservice.myrestfulservice.dao.UserDaoService;
 import kr.co.myservice.myrestfulservice.exception.UserNotFoundException;
@@ -36,8 +37,9 @@ public class UserController {
         return user;
     }
 
+    //@Valid => 사용자 데이터를 유효성 체크를 함
     @PostMapping("/users")
-    public ResponseEntity<User> createUser(@RequestBody final User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody final User user) {
         User savedUser = userDaoService.save(user);
 
         // return할 URI 정보를 추가함
