@@ -1,19 +1,19 @@
 <template>
-    <!-- html -->
-    <div class="clearAllContainer">
-        <span class="clearAllBtn" v-on:click="clearTodo"> Clear All </span>
-    </div>
+  <!-- html -->
+  <div class="clearAllContainer">
+    <span class="clearAllBtn" v-on:click="clearTodo"> Clear All </span>
+  </div>
 </template>
 
 <script>
 export default {
-    // js script
+  // js script
 
-    methods:{
-        clearTodo: function() {
-           this.$emit('clearAllTodoItem');
-        }
+  methods: {
+    clearTodo: function () {
+      this.$store.commit('clearAllTodoItem')
     }
+  }
 }
 </script>
 
@@ -21,17 +21,17 @@ export default {
 /* css */
 
 .clearAllContainer {
-    width: 8.5rem;
-    height: 50px;
-    line-height: 50px;
-    background-color: white;
-    border-radius: 5px;
-    margin: 0 auto;
+  width: 8.5rem;
+  height: 50px;
+  line-height: 50px;
+  background-color: white;
+  border-radius: 5px;
+  margin: 0 auto;
 }
 
 .clearAllBtn {
-    color: #e20303;
-    display: block;
+  color: #e20303;
+  display: block;
 }
 
 </style>
