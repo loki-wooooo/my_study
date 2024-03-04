@@ -1,4 +1,6 @@
 import Vuex from 'vuex'
+import * as getters from './getters'
+import * as mutations from './mutations'
 
 // use vue의 플러그인
 // 사용시 vue의 global 영역에서 추가할 시 사용함
@@ -28,27 +30,6 @@ export const store = new Vuex.Store({
         // headerText: "TODO it!"
         todoItems: storage.fetch(),
     },
-    mutations: {
-        addOneItem(state, todoItem) {
-            let obj = {completed: false, item: todoItem};
-            localStorage.setItem(todoItem, JSON.stringify(obj));
-            state.todoItems.push(obj)
-        },
-
-        removeOneItem(state, payload) {
-            localStorage.removeItem(payload.todoItem.item);
-            state.todoItems.splice(payload.index, 1); //배열을 변경해서 새로 넣어줌
-        },
-
-        toggleOneItem(state, payload) {
-            state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed // to-be
-            localStorage.removeItem(payload.todoItem.item);
-            localStorage.setItem(payload.todoItem.item, JSON.stringify(payload.todoItem));
-        },
-
-        clearAllItems(state) {
-            localStorage.clear();
-            state.todoItems = [];
-        }
-    }
+    getters,
+    mutations
 });

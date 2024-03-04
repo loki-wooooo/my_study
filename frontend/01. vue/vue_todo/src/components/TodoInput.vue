@@ -39,10 +39,6 @@ export default {
   , methods: {
     addTodo() {
       if (this.newTodoItem !== '') {
-        // commit을 하는 이유?
-        // store.js에 있는 mutation을 동작하기 위해
-        // type -> addOneItem mutation명
-        // this.$emit("addTodoItem', this.newTodoItem);
         this.$store.commit('addOneItem', this.newTodoItem)
         this.clearInput();
       } else {

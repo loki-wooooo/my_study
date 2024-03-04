@@ -1,31 +1,24 @@
 <template>
   <div>
     <transition-group name="list" tag="ul">
-      <!--            <li-->
-      <!--                v-for="(todoItem, index) in this.$props.propsdata"-->
-      <!--                v-bind:key="todoItem.item"-->
-      <!--                class="shadow"-->
-      <!--            >-->
-      <!-- vuex store로 변경처리 -->
       <li
-          v-for="(todoItem, index) in this.$store.state.todoItems"
+          v-for="(todoItem, index) in this.storedTodoItems"
           v-bind:key="todoItem.item"
           class="shadow"
       >
         <i
-            class="checkBtn fas fa-check"
-            v-bind:class="{checkBtnCompleted: todoItem.completed}"
-            v-on:click="this.toggleComplete(todoItem)"
+          class="checkBtn fas fa-check"
+          v-bind:class="{checkBtnCompleted: todoItem.completed}"
+          v-on:click="this.toggleComplete({todoItem, index})"
         ></i>
         <!-- false면 textCompleted 표출 X, true textCompleted 표출 O -->
         <span v-bind:class="{textCompleted: todoItem.completed}">{{ todoItem.item }}</span>
         <span
             class="removeBtn"
-            v-on:click="this.removeTodo(todoItem, index)"
+            v-on:click="this.removeTodo({todoItem, index})"
         >
-                    <i class="fas fa-trash-alt"></i>
-                </span>
-
+          <i class="fas fa-trash-alt"></i>
+        </span>
       </li>
     </transition-group>
   </div>
@@ -33,23 +26,19 @@
 
 <script>
 
+import {mapGetters, mapMutations} from "vuex";
+
+
 export default {
   methods: {
-    removeTodo(todoItem, index) {
-      let payload = {};
-      payload.todoItem = todoItem;
-      payload.index = index
-      // this.$emit('removeOneItem', todoItem, index)
-      this.$store.commit('removeOneItem', payload);
-    },
-
-    toggleComplete(todoItem, index) {
-      let payload = {};
-      payload.todoItem = todoItem;
-      payload.index = index
-      this.$store.commit('toggleOneItem', payload);
-    },
+    ...mapMutations({
+      removeTodo: 'removeOneItem', //인자를 선언안해도 암묵적으로 인자를 넘기고 있음
+      toggleComplete: 'toggleOneItem'
+    }),
   },
+  computed: {
+    ...mapGetters(['storedTodoItems'])
+  }
 }
 </script>
 
