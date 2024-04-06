@@ -1,0 +1,19 @@
+server:
+  # port의 0을 사용시 랜덤포트를 사용하겠다는 의미
+  port: 0
+spring:
+  application:
+    name: user-service
+
+eureka:
+  # random port를 사용하면 eureka server에 해당 내용이 하나로만 보임, 여러 어플리케이션으로 보이게 하려면 해당 고유 id가 필요함
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    #Eureka 서버로부터 인스턴스들의 정보를 주기적으로 가저올 것인지 설정하는 속성
+    fetch-registry: true
+    service-url:
+      #서버가 갖고있는 위치값
+      #해당 위치에 마이크로 서비스를 등록하겠다는 뜻
+      default-zone: http://127.0.0.1:8761/eureka
