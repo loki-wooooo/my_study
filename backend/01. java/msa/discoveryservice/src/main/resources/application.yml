@@ -1,0 +1,16 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: discoveryservice # 서버의 고유 ID
+
+eureka:
+  client:
+    # 아래 설정은 유레카 서버 자신을 자신에게 등록하지 않겠다는 설정
+    register-with-eureka: false
+    fetch-registry: false
+
+  instance:
+    hostname: localhost
+
