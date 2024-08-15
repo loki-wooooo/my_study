@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user-service")
+@RequestMapping("/") // https://127.0.0.1:60000/user-servfice/welcome -> welcome쪽에 관련된 uri를 변경처리
 public class UserController {
 
     private Environment env;

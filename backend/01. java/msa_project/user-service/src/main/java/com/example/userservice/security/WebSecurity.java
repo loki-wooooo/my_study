@@ -50,7 +50,7 @@ public class WebSecurity {
                 http.getSharedObject(AuthenticationManagerBuilder.class);
         authenticationManagerBuilder.
                 userDetailsService(userService)
-                .passwordEncoder(bCryptPasswordEncoder);
+                .passwordEncoder(bCryptPasswordEncoder); // 사용자 password는 암호화 처리되어있음.
 
         AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
 

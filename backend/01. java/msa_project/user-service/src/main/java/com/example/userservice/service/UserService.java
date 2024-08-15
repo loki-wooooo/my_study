@@ -4,6 +4,7 @@ package com.example.userservice.service;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.jpa.UserEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public interface UserService extends UserDetailsService {
 
@@ -13,4 +14,6 @@ public interface UserService extends UserDetailsService {
     Iterable<UserEntity> getUserByAll() throws Exception;
 
     UserDto createUser(final UserDto userDto) throws Exception;
+
+    UserDto getUserDetailsByEmail(final String userName) throws UsernameNotFoundException;
 }

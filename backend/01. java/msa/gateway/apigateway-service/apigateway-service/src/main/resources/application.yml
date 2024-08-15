@@ -65,10 +65,37 @@ spring:
   cloud:
     gateway:
       routes:
+#        - id: user-service
+#          uri: lb://USER-SERVICE
+#          predicates:
+#            - Path=/user-service/**
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie # request Header를 초기화해서 받음
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # url 요청에 따른 각 해당 서비스에 형태로 변경처리
+
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie # request Header를 초기화해서 받음
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # url 요청에 따른 각 해당 서비스에 형태로 변경처리
+
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
             - Path=/user-service/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie # request Header를 초기화해서 받음
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # url 요청에 따른 각 해당 서비스에 형태로 변경처리
+
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
           predicates:
