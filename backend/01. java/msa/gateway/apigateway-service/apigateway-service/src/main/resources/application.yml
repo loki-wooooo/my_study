@@ -95,6 +95,7 @@ spring:
           filters:
             - RemoveRequestHeader=Cookie # request Header를 초기화해서 받음
             - RewritePath=/user-service/(?<segment>.*), /$\{segment} # url 요청에 따른 각 해당 서비스에 형태로 변경처리
+            - AuthorizationHeaderFilter # filter 처리
 
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
@@ -116,3 +117,6 @@ spring:
             baseMessage: Spring Cloud Gateway GlobalFilter
             preLogger: true
             postLogger: true
+
+token:
+  secret: user_token
