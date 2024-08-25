@@ -1,0 +1,11 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-service
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://Users/hyoya/Documents/utils/01.work/03.project/git/my_study/git-local-repo
