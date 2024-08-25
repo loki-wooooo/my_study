@@ -12,4 +12,6 @@ public class ConfigServiceApplication {
         SpringApplication.run(ConfigServiceApplication.class, args);
     }
 
+
+
 }

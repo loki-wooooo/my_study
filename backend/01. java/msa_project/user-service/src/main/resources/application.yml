@@ -33,6 +33,14 @@ logging:
   level:
     com.example.userservice: DEBUG
 
-token:
-  expiration-time: 86400000
-  secret: user_token
+# refresh -> configuration server에서 갖고오는 정보 (변경된 값이 확인됨)
+# beans -> MSA에 등록된 bean 정보들
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
+
+#token:
+#  expiration-time: 86400000
+#  secret: user_token

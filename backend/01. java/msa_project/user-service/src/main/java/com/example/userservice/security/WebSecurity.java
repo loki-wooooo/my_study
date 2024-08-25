@@ -29,8 +29,9 @@ public class WebSecurity {
     }
 
     private static final String[] WHITE_LIST = {
-            "/users/**",
-            "/**"
+//            "/users/**",
+            "/**",
+            "/actuator/**", //beans, health, status etc..
     };
 
     @Bean
