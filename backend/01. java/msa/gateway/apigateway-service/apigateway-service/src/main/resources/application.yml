@@ -97,6 +97,15 @@ spring:
             - RewritePath=/user-service/(?<segment>.*), /$\{segment} # url 요청에 따른 각 해당 서비스에 형태로 변경처리
             - AuthorizationHeaderFilter # filter 처리
 
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/actuator/**
+            - Method=GET,POST
+          filters:
+            - RemoveRequestHeader=Cookie # request Header를 초기화해서 받음
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment} # url 요청에 따른 각 해당 서비스에 형태로 변경처리
+
         - id: catalog-service
           uri: lb://CATALOG-SERVICE
           predicates:
@@ -117,6 +126,12 @@ spring:
             baseMessage: Spring Cloud Gateway GlobalFilter
             preLogger: true
             postLogger: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace
 
 token:
   secret: user_token

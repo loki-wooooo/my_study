@@ -1,0 +1,5 @@
+spring:
+  cloud:
+    config:
+      uri: http://127.0.0.1:8888 #configuration server에 맞춰 정의
+      name: ecommerce
