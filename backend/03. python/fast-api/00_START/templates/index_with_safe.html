@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FastAPI & Jinja2 With Safe Filter</title>
+    </head>
+    <body>
+        <!-- "|safe" : 필터 사용시 HTML 테그가 포함된 문자열을 웹 페이지에서 안전하게 랜더링 할 수 있음  HTML 문자열을 그대로 리턴함 -->
+        {{ my_variable_with_html |safe }}
+    </body>
+</html>
