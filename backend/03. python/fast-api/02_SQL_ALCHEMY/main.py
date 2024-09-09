@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
-from sqlalchemy import Column, Integer, String, create_engine, MetaData
+from sqlalchemy import Column, Integer, String, create_engine, MetaData, desc, func
 from sqlalchemy.ext.declarative import declarative_base
 from pydantic import BaseModel
 from typing import Optional
@@ -48,12 +48,19 @@ def create_user(user: UserCreate, db: Session = Depends(get_db)):
     new_user = User(username=user.username, email=user.email)
     db.add(new_user)
     db.commit() 
+    
+    # 메서드는 객체의 속성을 현재 데이터베이스 상태와 동기화
     db.refresh(new_user)
     return {"id": new_user.id, "username": new_user.username, "email": new_user.email}
 
 @app.get("/users/{user_id}")
 def read_user(user_id: int, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
+    
+
+    # grouping
+    # db_user = db.query(User.username, func.count(User.id)).order_by(desc(User.username)).all()
+
     if db_user is None:
         return {"error": "User not found"}
     return {"id": db_user.id, "username": db_user.username, "email": db_user.email}
