@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends
-from sqlalchemy import Column, Integer, String, MetaData
+from sqlalchemy import Column, Integer, String, MetaData, func
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -53,6 +53,19 @@ async def get_db():
         await session.commit()
 
 
+# 테이블의 초기화 과정
+'''
+    # 동기 방식
+    # ddl create 실행
+    Base.metadata.create_all(bind=engine)
+
+    # 비동기 방식
+    # DB 접속, Table 생성, framework가 끝날때 자기가 할 수 있는 작업을 처리함
+    @asynccontextmanager -> 실행 컨텍스트를 관리하는 객체, 리소스 할당과 해제를 비동기적으로 관리
+
+    @asynccontextmanager 란?
+    - 비동기 코드에서 리소스의 획득과 해제를 자동으로 처리
+'''
 @asynccontextmanager
 async def app_lifespan(app: FastAPI):
     # 애플리케이션 시작 시 실행될 로직
@@ -62,10 +75,8 @@ async def app_lifespan(app: FastAPI):
     # 애플리케이션 종료 시 실행될 로직 (필요한 경우)
 
 
-# ddl create 실행
-Base.metadata.create_all(bind=engine)
-
 # FastAPI 애플리케이션을 초기화합니다.
+# application이 처음 초기화 할시, lifespan-> app_lifespan 함수를 호출함
 app = FastAPI(lifespan=app_lifespan)
 
 @app.get("/")
@@ -134,3 +145,11 @@ async def delete_user(user_id: int, db: AsyncSession = Depends(get_db)):
     await db.delete(db_user)
     await db.commit()
     return {"message": "사용자가 성공적으로 삭제되었습니다"}
+
+# count 함수 사용시 
+@app.get("/count")
+async def count_user(db: AsyncSession = Depends(get_db)):
+     # 비동기 쿼리 실행하여 사용자 찾기
+    result = await db.execute(select(func.count()).select_from(User))
+    count = result.scalars().one()
+    return {"count": count}
