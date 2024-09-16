@@ -4,8 +4,18 @@ server:
 spring:
   application:
     name: config-service
+
+  #native file system
+  profiles:
+    active: native
   cloud:
     config:
       server:
+        #local file system
+        native:
+          search-locations: file://Users/hyoya/Documents/utils/01.work/03.project/git/my_study/git-local-repo
         git:
-          uri: file://Users/hyoya/Documents/utils/01.work/03.project/git/my_study/git-local-repo
+#          uri: file://Users/hyoya/Documents/utils/01.work/03.project/git/my_study/git-local-repo
+          uri: https://github.com/loki-wooooo/my_study/tree/main/backend/01.%20java/spring-cloud-config
+#          username: [user_name] # git username
+#          password: [password] # git password
