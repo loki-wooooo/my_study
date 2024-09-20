@@ -136,6 +136,9 @@ async def update_memo(request:Request, memo_id: int, memo: MemoUpdate, db: Sessi
     #db_memo = db.query(Memo).filter(Memo.user_id == user.id, Memo.id == memo_id).first()
 
     # where, filter 둘다 동일해서 조건절만 입력해서 사용하면 됨
+    '''
+        .filter()와 .where()는 기능적으로 동일합니다. SQLAlchemy 1.4 버전부터 .where()가 .filter()의 동의어로 추가되었습니다.
+    '''
     result = db.execute(select(Memo).where(Memo.user_id == user.id, Memo.id == memo_id))
     db_memo = result.scalars().first()
 
@@ -163,7 +166,9 @@ async def delete_memo(request:Request, memo_id: int, db: Session = Depends(get_d
         raise HTTPException(status_code=401, detail="Not Authorized !")
 
     # step.2 사용자가 db에 없을때
-    user = db.query(User).filter(User.username == username).first()
+    #user = db.query(User).filter(User.username == username).first()
+    result = await db.execute(select(User).where(User.username == username))
+    user = result.scalars().first()
     if user is None:
         raise HTTPException(status_code=404, detail="User not Found !")
     
@@ -171,14 +176,16 @@ async def delete_memo(request:Request, memo_id: int, db: Session = Depends(get_d
         from sqlalchemy import and_
         db.query(Memo).filter(and_(Memo.user_id == user.id, Memo.id == memo_id)).first()
     '''
-    db_memo = db.query(Memo).filter(Memo.user_id == user.id, Memo.id == memo_id).first()
+    #db_memo = db.query(Memo).filter(Memo.user_id == user.id, Memo.id == memo_id).first()
+    result = db.execute(select(Memo).where(Memo.user_id == user.id, Memo.id == memo_id))
+    db_memo = result.scalars().first()
 
     if db_memo is None:
         return ({"error": "Memo not found"})
     
 
-    db.delete(db_memo)
-    db.commit()
+    await db.delete(db_memo)
+    await db.commit()
     return ({"message": "Memo Deleted"})
 
 
