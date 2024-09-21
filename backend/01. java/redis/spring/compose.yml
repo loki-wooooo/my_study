@@ -1,0 +1,16 @@
+services:
+  api-server:
+    build: . #dockerfile 기준으로 빌드
+    ports:
+      - 8080:8080
+    depends_on:
+      cache-server:
+        condition: service_healthy # service_healthy 서버가 정상적으로 실행된지 확인 이후 cache-server를 띄움
+  cache-server:
+    image: redis
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      retries: 10
