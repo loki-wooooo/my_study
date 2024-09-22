@@ -138,5 +138,6 @@ management:
       exposure:
         include: refresh, health, beans, httptrace, busrefresh
 
-token:
-  secret: user_token
+#config-server 에서 갖고오기 때문에 변경처리
+#token:
+#  secret: user_token
