@@ -25,7 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest
  * 코드 생성 단순화: 객체 초기화 시 마지막 요소 뒤에 쉼표를 추가하면 코드 생성이 더 간단해집니다1.
  * */
 @SpringBootTest
-class BookServiceTest @Autowired constructor(
+class JavaBookServiceTest @Autowired constructor(
     private val bookService: BookService,
     private val bookRepository: BookRepository,
     private val userRepository: UserRepository,
@@ -76,6 +76,7 @@ class BookServiceTest @Autowired constructor(
     @DisplayName("책이 진짜 대출되어있다면, 신규 대출이 실패한다.")
     fun loanBookFailTest() {
         //given
+        //default paarameter를 인식함
         bookRepository.save(Book("이상한 나라의 엘리스"))
         val savedUser = userRepository.save(User("admin", null))
         userLoanHistoryRepository.save(UserLoanHistory(savedUser, "이상한 나라의 엘리스", false))
