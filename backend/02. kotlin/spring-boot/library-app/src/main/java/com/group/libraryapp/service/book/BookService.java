@@ -36,7 +36,7 @@ public class BookService {
 
     @Transactional
     public void loanBook(BookLoanRequest request) {
-      Book book = bookRepository.findByName(request.getBookName()).orElseThrow(IllegalArgumentException::new);
+        Book book = bookRepository.findByName(request.getBookName()).orElseThrow(IllegalArgumentException::new);
         if (userLoanHistoryRepository.findByBookNameAndIsReturn(request.getBookName(), false) != null) {
             throw new IllegalArgumentException("진작 대출되어 있는 책입니다");
         }
