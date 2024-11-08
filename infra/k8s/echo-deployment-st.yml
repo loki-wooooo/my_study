@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-deploy
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: echo
+      tier: app
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 3
+
+  # 기본값 25% - 비활성화 되는 부분
+  # 실제환경에 맞춰서 사용
+  template:
+    metadata:
+      labels:
+        app: echo
+        tier: app
+    spec:
+      containers:
+        - name: echo
+          image: ghcr.io/subicura/echo:v1
