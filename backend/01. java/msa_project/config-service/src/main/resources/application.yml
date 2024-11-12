@@ -1,11 +1,35 @@
 server:
   port: 8888
 
+
+# link - https://yeomylaoo.tistory.com/m/877
 spring:
   application:
     name: config-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
+  #native file system
+  profiles:
+    active: native
   cloud:
     config:
       server:
+        #local file system
+        native:
+          search-locations: file://${user.home}/Documents/utils/01.work/03.project/git/my_study/git-local-repo
         git:
-          uri: file://Users/hyoya/Documents/utils/01.work/03.project/git/my_study/git-local-repo
+#          uri: file://Users/hyoya/Documents/utils/01.work/03.project/git/my_study/git-local-repo
+          uri: https://github.com/loki-wooooo/my_study/tree/main/backend/01.%20java/spring-cloud-config
+#          username: [user_name] # git username
+#          password: [password] # git password
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh

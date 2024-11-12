@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: counter-np
+spec:
+  # 일반적으로 'type'가 없다면 cluster ip를 사용함
+  type: NodePort
+  ports:
+    - port: 3000
+      protocol: TCP
+      nodePort: 31000
+  selector:
+    app: counter
+    tier: app
+

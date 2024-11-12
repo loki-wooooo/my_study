@@ -1,0 +1,47 @@
+{% include 'header.html' %}
+
+<!-- 상속  jsp -> include 랑 비슷함 -->
+{% extends "base.html" %}
+
+{% block content2 %}
+    <p> {{text}} </p>
+{% endblock %}
+
+{% block content1 %}
+    <p> dave </p>
+{% endblock %}
+
+
+<!-- <!DOCTYPE html>
+<html>
+    <head>
+        <title>FastAPI Template Example</title>
+    </head>
+    <body> -->
+        <!-- <h1> Hello, {{ username }} </h1>
+        <h1> Hi, {{ username }}, Hello </h1> -->
+<!-- 
+        {% if time_of_day == "morning" %}
+            <h1>Good Morning</h1>
+        {% elif time_of_day == "afternoon" %}
+            <h1>Good Afternoon</h1>
+        {% else %}
+            <h1>Good Evening</h1>
+        {% endif %}
+
+        {# 
+            이것은 주석 입니다.
+            이 부분은 랜더링 되지 않습니다.
+            이렇게 여러 줄로 확장 할 수 있어요
+        #} 
+-->
+        <!-- jinja2 template for -->
+        <!-- <ui>
+            {% for item in items %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ui>
+
+
+    </body>
+</html> -->

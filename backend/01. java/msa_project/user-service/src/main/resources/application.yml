@@ -4,17 +4,22 @@ server:
 spring:
   application:
     name: user-service
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   h2:
     console:
       enabled: true
       settings:
         web-allow-others: true
       path: /h2-console
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password: 1234
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:testdb
+#    username: sa
+#    password: 1234
 
 eureka:
   instance:
@@ -31,7 +36,8 @@ greeting:
 
 logging:
   level:
-    com.example.userservice: DEBUG
+#    com.example.userservice: DEBUG
+    com.example.userservice.client: DEBUG
 
 # refresh -> configuration server에서 갖고오는 정보 (변경된 값이 확인됨)
 # beans -> MSA에 등록된 bean 정보들
@@ -39,7 +45,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans
+        include: refresh, health, beans, busrefresh
 
 #token:
 #  expiration-time: 86400000

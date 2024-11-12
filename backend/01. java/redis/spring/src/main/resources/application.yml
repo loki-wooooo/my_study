@@ -1,0 +1,26 @@
+spring:
+  application:
+    name:spring
+  profiles:
+    default: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://220.220.220.18:5432/postgres?autoReconnect=true&charSet=UTF-8&currentSchema=redis
+    username: postgres
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  data:
+    redis:
+#      host: localhost
+      host: cache-server # docker-compose에서 사용하는 redis 서버 명
+      port: 6379 #default port
+
+
+
+logging:
+  level:
+    org.springframework.cache: trace # Redis ??? ?? ??? ????? ??
