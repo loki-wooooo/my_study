@@ -49,3 +49,27 @@ if uploaded_file:
     
     if 'past' not in st.session_state:
         st.session_state['past']
+    
+    #챗봇 이력에 대한 컨테이너
+    response_container = st.container()
+    #사용자가 입력한 문장에 대한 컨테이너
+    container = st.container()
+
+    with container:
+        with st.form(key='Conv_Question', clear_on_submit=True):
+            user_input= st.text_input("Query:", placeholder="PDF 파일에 대해 얘기해볼까요?(:", key='input')
+            submit_button = st.form_submit_button(label='Send')
+
+        # 사용자가 질문을 입력하거나, [Send] 버튼을 눌렀을 때 처리
+        if submit_button and user_input:
+            output = conversational_chat(user_input)
+            #사용자의 질문이나 LLM에 대한 결과를 계속 추가(append)
+            st.session_state['past'].append(user_input)
+            st.session_state['generated'].append(output)
+        #LLM이 답변을 해야 하는 경우에 대한 처리
+        if st.session_state['generated']:
+            with response_container:
+                for i in range(len(st.session_state['generated'])):
+                    message(st.session_state['past'][i], is_user=True, key=str(i) + '_user', avatar_style='fun-emoji', seed="Nala")
+                    message(st.session_state['generated'][i], key=str(i), avatar_style = 'bottts', seed='Fluffy')
+                    
