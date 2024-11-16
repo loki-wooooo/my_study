@@ -25,7 +25,7 @@ st.markdown('### 언어 번역 서비스 ###')
 prompt = st.text_input('번역을 원하는 텍스트를 입력하세요') # 사용자 텍스트 입력
 
 #프롬프트를 번역으로 지시
-trans_template = PropmtTemplate(input_variables=['trans'], template = 'Your task is to translate this text to '+ language + 'TEXT:{trans}')
+trans_template = PromptTemplate(input_variables=['trans'], template = 'Your task is to translate this text to '+ language + 'TEXT:{trans}')
 
 #Memory는 텍스트 저장 용도
 memory = ConversationBufferMemory(input_key='trans', memory_key='chat_history')
