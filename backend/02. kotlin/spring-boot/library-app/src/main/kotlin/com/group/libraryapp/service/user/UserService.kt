@@ -3,7 +3,11 @@ package com.group.libraryapp.service.user
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.dto.user.request.UserCreateRequest
+import com.group.libraryapp.dto.user.request.UserUpdateRequest
 import com.group.libraryapp.dto.user.response.UserResponse
+import com.group.libraryapp.utils.fail
+import com.group.libraryapp.utils.findByIdOrThrow
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -25,6 +29,23 @@ class UserService(
         return userRepository.findAll().map { user ->
             UserResponse(user)
         }
-
     }
+
+    @Transactional
+    fun updateUserName(request: UserUpdateRequest) {
+        // ::IllegalArgumentException -> java IllegalArgumentException::New
+//        val user = userRepository.findById(request.id).orElseThrow(::IllegalArgumentException)
+        //curd extension 을 사용해서 처리할 수 있음.
+//        val user = userRepository.findByIdOrNull(request.id) ?: fail()
+        // 확장 함수를 이용해서 해당 내용을 더 간략하게 변경처리
+        val user = userRepository.findByIdOrThrow(request.id)
+        user.updateName(request.name)
+    }
+
+    @Transactional
+    fun deleteUser(name: String) {
+        val user = userRepository.findByName(name) ?: fail()
+        userRepository.delete(user)
+    }
+
 }
