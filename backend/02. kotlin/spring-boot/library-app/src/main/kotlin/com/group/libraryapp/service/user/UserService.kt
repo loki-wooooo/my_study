@@ -27,7 +27,7 @@ class UserService(
 
         //존재하는 유저를 UserResponse로 변경처리
         return userRepository.findAll().map { user ->
-            UserResponse(user)
+            UserResponse.of(user)
         }
     }
 
