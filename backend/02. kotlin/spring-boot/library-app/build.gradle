@@ -3,8 +3,10 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'org.jetbrains.kotlin.jvm' version '1.6.21' // kotlin 추가
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21' // Spring 플러그인
     // kotlin은 주생성자를 받고 있기때문에, 기본생성자가 없어서 에러남 plugin을 이용해서 변경
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.6.21'
+    id 'org.jetbrains.kotlin.plugin.allopen' version "1.6.21" // AllOpen 플러그인
 }
 
 group = 'com.group'
@@ -19,6 +21,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+
+    //jackson module to kotlin
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3'
 
     // 코틀린 reflection을 위한 디펜덴시 추가
     runtimeOnly 'org.jetbrains.kotlin:kotlin-reflect:1.6.21'
