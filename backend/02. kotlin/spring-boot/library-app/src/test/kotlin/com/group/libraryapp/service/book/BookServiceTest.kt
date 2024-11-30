@@ -2,10 +2,12 @@ package com.group.libraryapp.service.book
 
 import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.book.BookRepository
+import com.group.libraryapp.domain.book.BookType
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
+import com.group.libraryapp.domain.user.loanhistory.UserLoanStatus
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
@@ -25,7 +27,7 @@ import org.springframework.boot.test.context.SpringBootTest
  * 코드 생성 단순화: 객체 초기화 시 마지막 요소 뒤에 쉼표를 추가하면 코드 생성이 더 간단해집니다1.
  * */
 @SpringBootTest
-class JavaBookServiceTest @Autowired constructor(
+class BookServiceTest @Autowired constructor(
     private val bookService: BookService,
     private val bookRepository: BookRepository,
     private val userRepository: UserRepository,
@@ -42,7 +44,7 @@ class JavaBookServiceTest @Autowired constructor(
     @DisplayName("책 등록이 정상 동작된다")
     fun saveBookTest() {
         //givne
-        val request = BookRequest("이상한 나라의 엘리스");
+        val request = BookRequest("이상한 나라의 엘리스", BookType.COMPUTER);
 
         //when
         bookService.saveBook(request);
@@ -57,7 +59,7 @@ class JavaBookServiceTest @Autowired constructor(
     @DisplayName("책 대출이 정상 동작된다.")
     fun loadBookTest() {
         //given
-        bookRepository.save(Book("이상한 나라의 엘리스"))
+        bookRepository.save(Book.fixture("이상한 나라의 엘리스"))
         val savedUser = userRepository.save(User(null, "admin", null))
         val request = BookLoanRequest("admin", "이상한 나라의 엘리스")
 
@@ -69,7 +71,7 @@ class JavaBookServiceTest @Autowired constructor(
         assertThat(results).hasSize(1);
         assertThat(results[0].bookName).isEqualTo("이상한 나라의 엘리스")
         assertThat(results[0].user.id).isEqualTo(savedUser.id)
-        assertThat(results[0].isReturn).isFalse
+        assertThat(results[0].status).isEqualTo(UserLoanStatus.LOADED)
     }
 
     @Test
@@ -77,9 +79,9 @@ class JavaBookServiceTest @Autowired constructor(
     fun loanBookFailTest() {
         //given
         //default paarameter를 인식함
-        bookRepository.save(Book("이상한 나라의 엘리스"))
+        bookRepository.save(Book.fixture("이상한 나라의 엘리스"))
         val savedUser = userRepository.save(User(null, "admin", null))
-        userLoanHistoryRepository.save(UserLoanHistory(null, savedUser, "이상한 나라의 엘리스", false))
+        userLoanHistoryRepository.save(UserLoanHistory.fixture(null, savedUser, "이상한 나라의 엘리스"))
         val request = BookLoanRequest("admin", "이상한 나라의 엘리스")
 
         //when&then
@@ -93,9 +95,9 @@ class JavaBookServiceTest @Autowired constructor(
     @DisplayName("책 반납이 정상적으로 동작한다.")
     fun returnBookTest() {
         //given
-        bookRepository.save(Book("이상한 나라의 엘리스"))
+        bookRepository.save(Book.fixture("이상한 나라의 엘리스"))
         val savedUser = userRepository.save(User(null, "admin", null))
-        userLoanHistoryRepository.save(UserLoanHistory(null, savedUser, "이상한 나라의 엘리스", false))
+        userLoanHistoryRepository.save(UserLoanHistory.fixture(null, savedUser, "이상한 나라의 엘리스"))
         val request = BookReturnRequest("admin", "이상한 나라의 엘리스")
 
         //when
@@ -104,7 +106,7 @@ class JavaBookServiceTest @Autowired constructor(
         //then
         val results = userLoanHistoryRepository.findAll();
         assertThat(results).hasSize(1);
-        assertThat(results[0].isReturn).isTrue
+        assertThat(results[0].status).isEqualTo(UserLoanStatus.RETURNED)
 
     }
 
