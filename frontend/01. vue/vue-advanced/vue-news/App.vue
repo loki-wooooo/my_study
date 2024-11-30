@@ -1,10 +1,20 @@
 <template>
+  <!--1. Strongly Recommended-->
+  <!-- <Toolbar></Toolbar> -->
+  <!--2. Essential-->
+  <tool-bar></tool-bar>
   <router-view></router-view>
 </template>
 
 <script>
 
+import ToolBar from './components/ToolBar.vue';
+
+
 export default {
+  components: {
+    ToolBar,
+  },
   methods: {
 
     fetchData() {
@@ -23,5 +33,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+body {
+  padding: 0;
+  margin: 0;
 }
 </style>
