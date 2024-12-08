@@ -42,7 +42,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory(), // url : http://naver.com/#/news -> "#"제거용
   routes,
 });
 
