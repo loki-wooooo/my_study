@@ -19,6 +19,10 @@ class UserLoanHistory(
 
     ) {
 
+    // custom 객체 생성
+    val isReturn: Boolean
+        get() = status == UserLoanStatus.RETURNED
+
     fun doReturn() {
         this.status = UserLoanStatus.RETURNED
     }

@@ -133,4 +133,5 @@ class UserServiceTest @Autowired constructor(
         assertThat(results[0].books).extracting("name").containsExactlyInAnyOrder("책1","책2","책3")
         assertThat(results[0].books).extracting("isReturn").containsExactlyInAnyOrder(false,false,true)
     }
+
 }
