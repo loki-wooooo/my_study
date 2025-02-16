@@ -6,8 +6,14 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21' // Spring 플러그인
     // kotlin은 주생성자를 받고 있기때문에, 기본생성자가 없어서 에러남 plugin을 이용해서 변경
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.6.21'
+<<<<<<< Updated upstream
     id 'org.jetbrains.kotlin.plugin.allopen' version "1.6.21" // AllOpen 플러그인
     id 'org.jetbrains.kotlin.kapt' version "1.6.21"
+=======
+    // kotlin은 상속을 할 수 없기 때문에  plugin을 사용 "open" 사용 X
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+
+>>>>>>> Stashed changes
 }
 
 group = 'com.group'

@@ -5,7 +5,11 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+<<<<<<< Updated upstream
         <option name="gradleHome" value="$PROJECT_DIR$/../../../../../../02.build/gradle-8.10.2" />
+=======
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../../../../02.build/01.gradle/gradle-8.6" />
+>>>>>>> Stashed changes
         <option name="gradleJvm" value="17" />
         <option name="modules">
           <set>
