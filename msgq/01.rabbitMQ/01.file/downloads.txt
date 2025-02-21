@@ -1,0 +1,3 @@
+file 링크로 대체
+	rabbitmq : https://www.rabbitmq.com/docs/download
+	erlang : https://www.erlang.org/downloads
