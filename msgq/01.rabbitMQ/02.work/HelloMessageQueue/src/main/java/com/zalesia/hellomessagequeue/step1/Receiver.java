@@ -1,4 +1,4 @@
-package com.zalesia.hellomessagequeue.step0;
+package com.zalesia.hellomessagequeue.step1;
 
 import org.springframework.stereotype.Component;
 
