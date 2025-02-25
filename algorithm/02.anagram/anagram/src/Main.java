@@ -51,7 +51,7 @@ public class Main {
 //            } else if (countA[i] < countB[i]) {
 //                answer += countB[i] - countA[i];
 //            }
-            
+
             // 절대값 변경 (음수 양수 상관없이 음수로 리턴)
             answer += Math.abs(countA[i] - countB[i]);
         }
