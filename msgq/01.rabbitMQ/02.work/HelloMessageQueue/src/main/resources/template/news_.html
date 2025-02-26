@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Notifications</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+</head>
+<body>
+<h1>News Sample</h1>
+<p th:text="${message}"></p>
+
+<!-- Select News Type -->
+<label for="newsType">Select News Type:</label>
+<select id="newsType">
+    <option value="java">java</option>
+    <option value="spring">spring</option>
+    <option value="vue">vue</option>
+</select>
+<button onclick="connect()">Connect</button>
+
+<div id="news"></div>
+<!-- Notifications -->
+
+<script>
+    let stompClient;
+    let subscription = null;
+
+    function connect() {
+        const newsType = document.getElementById("newsType").value;
+        initializeWebSocketConnection()
+            .then(() => {
+                sendNewsType(newsType);
+                return subscribeToNews(newsType);
+            })
+            .catch(error => {
+                console.error("Error during connection or subscription:", error);
+            });
+    }
+
+    function initializeWebSocketConnection() {
+        // WebSocket 연결 초기화
+        return new Promise((resolve, reject) => {
+            if (!stompClient) {
+                const socket = new SockJS('/ws');
+                stompClient = Stomp.over(socket);
+
+                stompClient.connect({}, function () {
+                    console.log("Connected to WebSocket");
+                    resolve();
+                }, function (error) {
+                    console.error("WebSocket connection error:", error);
+                    reject(error);
+                });
+            } else if (stompClient.connected) {
+                resolve();
+            } else {
+                reject("WebSocket is not connected.");
+            }
+        });
+    }
+
+    function sendNewsType(newsType) {
+        stompClient.send("/app/subscribe", {newsType: newsType}, "");
+        console.log(`Sent newsType to server: ${newsType}`);
+    }
+
+    function subscribeToNews(newsType) {
+        return new Promise((resolve, reject) => {
+            if (subscription) {
+                subscription.unsubscribe();
+                console.log("Previous subscription cancelled.");
+            }
+
+            subscription = stompClient.subscribe(`/topic/${newsType}`, function (message) {
+                addMessageToDiv(message.body);
+            }, function (error) {
+                console.error("Subscription error:", error);
+                reject(error);
+            });
+
+            console.log(`Subscribed to /topic/${newsType}`);
+            resolve();
+        });
+    }
+
+    function addMessageToDiv(message) {
+        const newsDiv = document.getElementById("news");
+        const newMessage = document.createElement("div");
+        newMessage.textContent = message;
+        newsDiv.appendChild(newMessage);
+    }
+</script>
+</body>
+</html>
