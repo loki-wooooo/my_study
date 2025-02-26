@@ -1,8 +1,5 @@
 package com.zalesia.hellomessagequeue.step3;
 
-<<<<<<< Updated upstream
-public class HomeController {
-=======
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,5 +12,4 @@ public class HomeController {
         model.addAttribute("message", "Welcome to RabbitMQ Sample");
         return "home";
     }
->>>>>>> Stashed changes
 }

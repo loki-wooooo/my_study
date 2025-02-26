@@ -21,12 +21,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-<<<<<<< Updated upstream
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
-=======
-
-
->>>>>>> Stashed changes
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

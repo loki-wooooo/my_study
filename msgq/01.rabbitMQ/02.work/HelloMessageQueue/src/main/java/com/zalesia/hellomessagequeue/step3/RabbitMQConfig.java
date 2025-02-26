@@ -1,6 +1,5 @@
 package com.zalesia.hellomessagequeue.step3;
 
-<<<<<<< Updated upstream
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.FanoutExchange;
@@ -53,7 +52,4 @@ public class RabbitMQConfig {
         return BindingBuilder.bind(notificationQueue).to(notificationFanoutExchange);
     }
 
-=======
-public class RabbitMQConfig {
->>>>>>> Stashed changes
 }

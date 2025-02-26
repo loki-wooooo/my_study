@@ -1,6 +1,5 @@
 package com.zalesia.hellomessagequeue.step3;
 
-<<<<<<< Updated upstream
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
@@ -24,8 +23,4 @@ public class NotificationSubscriber {
         simpMessagingTemplate.convertAndSend(CLIENT_URL, message); //클라이언트에 브로드캐스트
     }
 
-
-=======
-public class NotificationSubscriber {
->>>>>>> Stashed changes
 }
