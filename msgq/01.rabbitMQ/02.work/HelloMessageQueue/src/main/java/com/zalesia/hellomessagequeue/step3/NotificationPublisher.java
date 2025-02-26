@@ -1,5 +1,6 @@
 package com.zalesia.hellomessagequeue.step3;
 
+<<<<<<< Updated upstream
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
@@ -18,4 +19,7 @@ public class NotificationPublisher {
         rabbitTemplate.convertAndSend(RabbitMQConfig.FANOUT_EXCHANGE, "", message);
         System.out.println("[#] Published Notification: " + message);
     }
+=======
+public class NotificationPublisher {
+>>>>>>> Stashed changes
 }
