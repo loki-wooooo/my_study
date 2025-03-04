@@ -5,89 +5,21 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         /**
-         *  순서(Index)를 갖는 데이터의 집합
-         * 생성과 동시에 크기가 고정
+         * 배열
+         *  - 원소를 몇개담을지
+         *  - 타입이 어떤 타입을 사용할지
+         *  - 반복문이랑 같이 자주 등장
+         *  - 순서를 갖는 데이터의 집합
+         *  - 생성과 동시에 크기가 정해짐
+         *  - 메모리상에 1열로 저장
          *
-         * 문제
-         * 모든 행과 열에 경비원이 최소 한 명씩 있어야 할때
-         * 추가로 필요한 경비원의 인원 수
          *
-         * => 각 행,열에 대해서 경비원이 있는지 확인
-         * => 보호받지 못하는 행/열 개수를 구한다.
-         * => 둘 중 큰 값을 출력한다.
+         *  * 시간복잡도
+         *      - get(int idx) : idx 원소 집합 O(1)
+         *      - change(int idx, int val) : idx번째 원소를 val로 변경 O(1)
+         *      - append(int val) : 가장 뒤에 원소 삽입 O(1)
+         *      - insert(int idx, int val) : 현재 idx번째 원소의 앞에 원소 삽입 O(N)
+         *      - erase(int idx) : idx번쨰 원소 삭제 O(N)
          * */
-
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        char[][] map = new char[n][m];
-        for (int i = 0; i < n; i++) {
-            map[i] = sc.next().toCharArray();
-        }
-
-        // case 1
-//        int existRowCount = 0;
-//        for (int i = 0; i < n; i++) {
-//            boolean exist = false;
-//            // 경비원 확인
-//            for (int j = 0; j < m; j++) {
-//                if (map[i][j] == 'X') {
-//                    exist = true;
-//                    break;
-//                }
-//                if (exist) {
-//                    existRowCount++;
-//                }
-//            }
-//        }
-//
-//        int existColCount = 0;
-//        for (int i = 0; i < m; i++) {
-//            boolean exist = false;
-//            // 경비원 확인
-//            for (int j = 0; j < n; j++) {
-//                if (map[j][i] == 'X') {
-//                    exist = true;
-//                    break;
-//                }
-//                if (exist) {
-//                    existRowCount++;
-//                }
-//            }
-//        }
-
-//        int needRowCount = n - existRowCount;
-//        int needColCount = m - existColCount;
-
-        //case 2
-
-        boolean[] existRow = new boolean[n];
-        boolean[] existCol = new boolean[m];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (map[i][j] == 'X') {
-                    existRow[i] = true;
-                    existCol[j] = true;
-                }
-            }
-        }
-
-        int needRowCount = n;
-        int needColCount = m;
-        for (int i = 0; i < n; i++) {
-            if (existRow[i]) {
-                needRowCount--;
-            }
-        }
-
-        for (int i = 0; i < n; i++) {
-            if (existCol[i]) {
-                needColCount--;
-            }
-        }
-
-        System.out.println(Math.max(needRowCount, needColCount));
-
     }
 }
