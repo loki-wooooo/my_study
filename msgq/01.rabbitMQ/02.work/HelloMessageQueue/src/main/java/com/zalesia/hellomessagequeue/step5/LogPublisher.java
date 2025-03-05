@@ -13,7 +13,18 @@
 //    }
 //
 //    public void publish(final String routingKey, final String message) {
+<<<<<<< Updated upstream
 //        rabbitTemplate.convertAndSend(RabbitMQConfig.DIRECT_EXCHANGE, routingKey, message);
 //        System.out.println("[#] message published : " + message);
 //    }
+=======
+//        rabbitTemplate.convertAndSend(RabbitMQConfig.TOPIC_EXCHANGE, routingKey, message);
+//        System.out.println("[#] message published : " + message);
+//    }
+//
+////    public void publish(final String routingKey, final String message) {
+////        rabbitTemplate.convertAndSend(RabbitMQConfig.DIRECT_EXCHANGE, routingKey, message);
+////        System.out.println("[#] message published : " + message);
+////    }
+>>>>>>> Stashed changes
 //}
