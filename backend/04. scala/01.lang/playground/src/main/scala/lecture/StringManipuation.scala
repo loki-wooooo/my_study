@@ -35,6 +35,6 @@ object StringManipuation extends App {
 
     val words = text.split(" ")
     println(words.mkString(", "))
-    
+
 
 }
