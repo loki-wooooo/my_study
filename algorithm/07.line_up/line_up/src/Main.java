@@ -19,7 +19,7 @@ public class Main {
         int a[] = {6,2,3,7,5,1,4};
         System.out.println(a.length);
 
-        //6 2 3 7 5 1 4
+        // 6 2 3 7 5 1 4
         Scanner sc = new Scanner(System.in);
         int[] h = new int[7];
         for (int i = 0; i < 7; i++) {
@@ -30,6 +30,7 @@ public class Main {
         int count = 0;
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < i; j++) {
+                //뒤에서 부터 정렬해서 보내줌 
                 if (h[j] > h[i]) {
                     count++;
                 }
