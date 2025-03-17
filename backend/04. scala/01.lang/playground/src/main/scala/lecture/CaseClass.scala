@@ -15,7 +15,7 @@ object CaseClass extends App {
 
     //Pattern matching on case class instances
     alice match {
-        case Person("Alice", 30) => println(s"Hello, Alice! Your age is $age")
+        case Person("Alice", age) => println(s"Hello, Alice! Your age is $age")
         case _ => println("Unknown person")
     }
 
@@ -38,6 +38,7 @@ object CaseClass extends App {
             println(s"Log: $message")
         }
     }
+
     Logger.log("this is a log message")
 
 

@@ -1,6 +1,6 @@
 package lecture
 
-object StaticClass extends App{
+object StaticClass extends App {
 
     //define class
     class Person(name: String, age: Int) {

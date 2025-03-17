@@ -18,7 +18,7 @@ object Enum extends App {
 
     //enum with constructor
     enum Planet(val mass: Double, radius: Double) {
-        case Earth extends Planet(5, 97e24, 6.378e6)
+        case Earth extends Planet(5.97e24, 6.378e6)
         case Mars extends Planet(6.39e23, 3.389e6)
     }
 
