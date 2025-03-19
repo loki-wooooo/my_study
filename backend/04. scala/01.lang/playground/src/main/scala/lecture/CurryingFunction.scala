@@ -7,7 +7,7 @@ object CurryingFunction extends App {
     println(addingTwo(3))
 
     def discount(discountPercentage: Double)(price: Double): Double = price * (1 - discountPercentage/100)
-    
+
     //create parital function
     val tenPercentOff = discount(10) _
     val twentyPercentOff = discount(20) _
