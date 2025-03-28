@@ -76,7 +76,7 @@ public class Main {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
 
-                // 열체크
+                // 열체크(ㅡ)
                 // 체크 후 다시 변경
                 if (j + 1 < N && map[i][j] != map[i][j + 1]) {
                     swapCandy(map, i, j, i, j + 1);
@@ -84,7 +84,7 @@ public class Main {
                     swapCandy(map, i, j, i, j + 1);
                 }
 
-                // 행체크
+                // 행체크(ㅣ)
                 // 체크 후 다시 변경
                 if (i + 1 < N && map[i][j] != map[i + 1][j]) {
                     swapCandy(map, i, j, i + 1, j);
