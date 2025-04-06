@@ -45,7 +45,7 @@ public class Main {
         boolean[] used = new boolean[26];
         for (int i = 0; i < N; i++) {
             if (wheel[i] == '?') continue;
-            if (used[wheel[i] - 'A']) {
+            if (used[wheel[i] - 'A']) { // AAAA 이런 케이스는 중복 문자열이라 값이 나오는게 아닌 "!" 출력
                 System.out.println("!");
                 return;
             }
