@@ -1,10 +1,8 @@
-import { createRouter, createWebHistory } from "vue-router";
-import { createApp } from "vue";
-import NewsView from '../views/NewsView.vue'
-import AskView from '../views/AskView.vue'
-import JobsView from '../views/JobsView.vue'
-import ItemView from '../views/ItemView.vue'
-import UserView from '../views/UserView.vue'
+import {createRouter, createWebHistory} from "vue-router";
+import NewsView from '../../views/NewsView.vue'
+import AskView from '../../views/AskView.vue'
+import ItemView from '../../views/ItemView.vue'
+import UserView from '../../views/UserView.vue'
 
 const routes = [
   // 여기에 라우트 정의
