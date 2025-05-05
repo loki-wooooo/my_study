@@ -1,0 +1,40 @@
+buildscript {
+    ext {
+        jasyptVersion = '1.9.3'
+        commonsIoVersion = '2.15.1'
+        mapStructVersion='1.5.5.Final'
+    }
+}
+
+plugins {
+    id 'java-library'
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar.enabled = false
+
+dependencies {
+
+    //logging 사용시 필요함
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
+
+    //multipart-file 파싱에 필요함
+    implementation 'org.springframework:spring-web'
+
+    // 암/복호화 유틸리티 라이브러리
+    implementation "org.jasypt:jasypt:${jasyptVersion}"
+
+    // MapStruct
+    api "org.mapstruct:mapstruct:${mapStructVersion}"
+
+    // common-io
+    api "commons-io:commons-io:${commonsIoVersion}"
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+}
+
+test {
+    useJUnitPlatform()
+}
