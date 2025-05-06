@@ -6,7 +6,7 @@ setting:
     x-frame-option: false
 
   logging:
-    file-path: log_path
+    file-path: /Users/administration/Downloads/git/my_study/backend/01. java/spring_market/spring_market/module-server/src/main/resources/config/logback.xml
 
   #message-queue:
   #  host: 220.220.220.242
@@ -14,21 +14,25 @@ setting:
   #  username: apuser
   #  password: apuser
 
-  #object-storage:
-  #  host: 220.220.220.242
-  #  port: 9000
-  #  access-key: admin
-  #  secret-key: password
+  object-storage:
+    host: 220.220.220.242
+    port: 9000
+    access-key: admin
+    secret-key: password
 
   database:
     rdbms:
-      host: 127.0.0.1
+      host: 220.220.220.18
       port: 5432
       username: postgres
       password: 1234
       db-name: postgres
       current-schema: spring_market
       chat-set: UTF-8
+      ddl-auto: update
+    sql:
+      init:
+        mode: never
 
   auth:
     jwt:

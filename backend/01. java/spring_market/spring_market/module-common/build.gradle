@@ -3,6 +3,7 @@ buildscript {
         jasyptVersion = '1.9.3'
         commonsIoVersion = '2.15.1'
         mapStructVersion='1.5.5.Final'
+        mapStructBindingVersion='0.2.0'
     }
 }
 
@@ -33,6 +34,8 @@ dependencies {
     api "commons-io:commons-io:${commonsIoVersion}"
 
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${mapStructBindingVersion}"
+
 }
 
 test {

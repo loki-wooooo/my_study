@@ -30,18 +30,18 @@ public class Category extends CommonEntity {
     @Comment("카테고리 Id")
     String id;
 
-    @Column(name = "CATEGOTY_NAME", nullable = false, length = 50)
+    @Column(name = "CATEGORY_NAME", nullable = false, length = 50)
     @Comment("카테고리 명")
     String name;
 
-    @Column(name = "CATEGOTY_LEVEL", nullable = false)
+    @Column(name = "CATEGORY_LEVEL", nullable = false)
     @Comment("카테고리 계층 Level")
     Integer level;
 
     // 카테고리의 계층 Level에 따라 부모가 생김
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CATEGOTY_PARENT_ID")
-    Category parent = new Category();
+    @JoinColumn(name = "CATEGORY_PARENT_ID")
+    Category parent;
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<Category> children = new ArrayList<>();

@@ -2,12 +2,10 @@ package io.github.lokiwooooo.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -37,11 +35,17 @@ public class JpaConfig {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setShowSql(true);
         adapter.setDatabase(Database.POSTGRESQL);
+        adapter.setGenerateDdl(true);  // DDL 생성 활성화
         return adapter;
     }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(
+            @Value("${spring.jpa.hibernate.ddl-auto}") final String ddlAuto,
+            @Value("${spring.jpa.properties.hibernate.dialect}") final String databasePlatform,
+            @Value("${spring.jpa.properties.hibernate.default_schema}") final String schema,
+            @Value("${spring.jpa.properties.hibernate.format_sql}") final Boolean formatSql,
+            @Value("${spring.jpa.properties.hibernate.show_sql}") final Boolean showSql,
             DataSource dataSource,
             JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -50,8 +54,12 @@ public class JpaConfig {
         factory.setPackagesToScan("io.github.lokiwooooo.domain.**.entity");
 
         Properties jpaProperties = new Properties();
-        jpaProperties.setProperty("hibernate.hbm2ddl.auto", "update");
-        jpaProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        jpaProperties.setProperty("hibernate.dialect", databasePlatform);
+        jpaProperties.setProperty("hibernate.hbm2ddl.auto", ddlAuto);
+        jpaProperties.setProperty("hibernate.default_schema", schema);
+        jpaProperties.setProperty("hibernate.format_sql", formatSql.toString());
+        jpaProperties.setProperty("hibernate.show_sql", showSql.toString());
+
         factory.setJpaProperties(jpaProperties);
 
         return factory;

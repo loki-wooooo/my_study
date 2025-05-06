@@ -37,7 +37,7 @@ public class ProductOptionGroup extends CommonEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
-    Product product = new Product();
+    Product product;
 
     @OneToMany(mappedBy = "productOptionGroup", cascade = CascadeType.ALL)
     List<ProductOption> productOption = new ArrayList<>();

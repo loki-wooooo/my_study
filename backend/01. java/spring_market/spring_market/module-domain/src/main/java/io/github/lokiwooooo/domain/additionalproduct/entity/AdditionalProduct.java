@@ -29,6 +29,10 @@ public class AdditionalProduct extends CommonEntity {
     @Comment("추가 상품 Id")
     String id;
 
+    @Column(name = "ADDITIONAL_PRODUCT_NAME", nullable = false, length = 200)
+    @Comment("추가 상품 명")
+    String name;
+
     @Column(name = "ADDITIONAL_PRODUCT_PRICE", nullable = false, precision = 12, scale = 2)
     @Comment("추가 상품 가격")
     BigDecimal price;

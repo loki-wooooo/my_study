@@ -1,6 +1,8 @@
 buildscript {
     ext {
         queryDslVersion='5.0.0'
+        mapStructVersion='1.5.5.Final'
+        mybatisVersion = "3.0.3"
     }
 }
 
@@ -20,12 +22,14 @@ dependencies {
     // QueryDSL
     implementation "com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta"
     implementation "com.querydsl:querydsl-core:${queryDslVersion}"
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}"
 
     annotationProcessor(
             "com.querydsl:querydsl-apt:${queryDslVersion}:jakarta",
             'jakarta.annotation:jakarta.annotation-api',
             'jakarta.persistence:jakarta.persistence-api'
     )
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
 
     runtimeOnly 'com.h2database:h2'
 

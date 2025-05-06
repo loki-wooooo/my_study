@@ -29,9 +29,9 @@ public class ProductOption extends CommonEntity {
     @Comment("옵션 상품 Id")
     String id;
 
-    @Column(name = "PRODUCT_OPTION_ADDITIONAL_PRICE", nullable = false, precision = 12, scale = 2)
+    @Column(name = "PRODUCT_OPTION_PRICE", nullable = false, precision = 12, scale = 2)
     @Comment("옵션 상품 추가 가격")
-    BigDecimal additionalPrice;
+    BigDecimal price;
 
     @Column(name = "PRODUCT_OPTION_VALUE", nullable = false, length = 200)
     @Comment("옵션 상품 값")

@@ -21,7 +21,7 @@ dependencies {
     implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}"
     implementation "com.zaxxer:HikariCP"
 
-    implementation "org.springframework.boot:spring-boot-starter-amqp"
+//    implementation "org.springframework.boot:spring-boot-starter-amqp"
     implementation "io.minio:minio:${minioVersion}"
 
     // 암/복호화 유틸리티 라이브러리

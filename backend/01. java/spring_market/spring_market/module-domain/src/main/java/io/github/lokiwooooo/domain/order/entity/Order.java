@@ -37,7 +37,7 @@ public class Order extends CommonEntity {
     @Comment("주문 일시")
     LocalDateTime date;
 
-    @Column(name = "ORDER_DATE", nullable = false, length = 100)
+    @Column(name = "ORDER_STATUS", nullable = false, length = 100)
     @Comment("주문 상태")
     @Enumerated(EnumType.STRING)
     OrderStatus status;

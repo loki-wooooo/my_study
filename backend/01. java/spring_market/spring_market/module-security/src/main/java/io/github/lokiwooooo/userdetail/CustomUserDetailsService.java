@@ -36,7 +36,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         List<GrantedAuthority> authorities = null;
         try {
             //Step1 객체 관련 내용 확인
-            User user = userRepository.findByUserName(username).orElse(null);
+            User user = userRepository.findByName(username).orElse(null);
             if (user == null) {
                 throw new UsernameNotFoundException("### user is not found  username :: " + username + " ###");
             } else {

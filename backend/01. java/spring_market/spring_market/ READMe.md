@@ -45,16 +45,15 @@
       AdditionalProduct	            상품과 함께 구매 가능한 추가상품(예: 보증연장, 액세서리 등)	        N:1 → Product
    
     * 흐름도
-      * 주문
+      * 상품 주문
       User (1) ──< (N) Order (1) ──< (N) OrderItem (1) ──< (N) OrderItemOption
-        │
-        └──< (N) OrderItemAdditionalProduct
-      * 상품
+                                            │
+                                            └──< (N) OrderItemAdditionalProduct
+      * 상품(단일 상폼, 상품 옵션, 추천 상품)
       Category (1) ──< (N) Product (1) ──< (N) ProductOptionGroup (1) ──< (N) ProductOption
-        │
+        │                     │
+        │                     └──< (N) AdditionalProduct
         └──< (N) Category (자기참조, 계층형)
-      * 추가상품
-      Product (1) ──< (N) AdditionalProduct
       * 주문서 상품정보
       OrderItem (N) ──> (1) Product
 
