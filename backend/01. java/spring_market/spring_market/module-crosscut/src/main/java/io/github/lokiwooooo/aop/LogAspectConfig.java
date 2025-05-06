@@ -29,6 +29,7 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class LogAspectConfig {
 
+    private static final String UNKNOWN = "unknown";
     LogMapper logMapper;
     LogRepository logRepository;
 
@@ -71,7 +72,7 @@ public class LogAspectConfig {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
             String logContent = String.format(
-                    "작업 유형: %s\n요청 URL: %s\n요청 시간: %s\n응답 시간: %s\n실행 시간: %dms",
+                    "작업 유형: %s%n요청 URL: %s%n요청 시간: %s%n응답 시간: %s%n실행 시간: %dms",
                     operationType,
                     getRequestURI(request),
                     requestTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
@@ -80,7 +81,7 @@ public class LogAspectConfig {
             );
 
             log.info("API 실행 정보:\n{}", logContent);
-            insertLogs(request, LogType.API, operationType, logContent);
+            insertLogs(request, operationType, logContent);
 
             return result;
 
@@ -92,7 +93,7 @@ public class LogAspectConfig {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 
             String errorLogContent = String.format(
-                    "작업 유형: %s\n요청 URL: %s\n요청 시간: %s\n에러 발생 시간: %s\n실행 시간: %dms\n에러 메시지: %s",
+                    "작업 유형: %s%n요청 URL: %s%n요청 시간: %s%n에러 발생 시간: %s%n실행 시간: %dms%n에러 메시지: %s",
                     operationType,
                     getRequestURI(request),
                     requestTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
@@ -102,16 +103,15 @@ public class LogAspectConfig {
             );
 
             log.error("API 에러:\n{}", errorLogContent);
-            insertLogs(request, LogType.API, operationType, errorLogContent);
+            insertLogs(request, operationType, errorLogContent);
 
             throw e;
         }
     }
 
     private void insertLogs(final HttpServletRequest request,
-                            final LogType logType,
                             final LogDetailType logDetailType,
-                            final String logContent) throws Exception {
+                            final String logContent) {
         String userName = request.getRemoteUser();
         String requestIp = getClientIp(request);
 
@@ -120,9 +120,9 @@ public class LogAspectConfig {
         }
 
         LogDto logDto = LogDto.builder()
-                .logType(logType)
-                .logDetailType(logDetailType)
-                .logContent(logContent)
+                .type(LogType.API)
+                .detailType(logDetailType)
+                .content(logContent)
                 .ip(requestIp)
                 .isUse(true)
                 .createdOn(LocalDateTime.now())
@@ -138,9 +138,8 @@ public class LogAspectConfig {
     /**
      * 요청 URI 정보 리턴
      */
-    private String getRequestURI(final HttpServletRequest request) throws Exception {
-        String requestUri = request.getRequestURI().replaceAll(request.getContextPath() + "/rest/market/v1", "");
-        return requestUri;
+    private String getRequestURI(final HttpServletRequest request) {
+        return request.getRequestURI().replaceAll(request.getContextPath() + "/rest/market/v1", "");
     }
 
     /**
@@ -149,23 +148,23 @@ public class LogAspectConfig {
     public String getClientIp(final HttpServletRequest httpServletRequest) {
         String ip = httpServletRequest.getHeader("x-original-forwarded-for");
 
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = httpServletRequest.getHeader("Proxy-Client-IP");
         }
 
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = httpServletRequest.getHeader("WL-Proxy-Client-IP");
         }
 
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = httpServletRequest.getHeader("HTTP_CLIENT_IP");
         }
 
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = httpServletRequest.getHeader("HTTP_X_FORWARDED_FOR");
         }
 
-        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
             ip = httpServletRequest.getRemoteAddr().toLowerCase();
         }
 

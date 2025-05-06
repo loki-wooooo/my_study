@@ -1,0 +1,70 @@
+### Logger setting ###
+logging:
+  config: file:${setting.logging.file-path}
+
+server:
+  port: ${setting.server.port}
+  servlet:
+    context-path: ${setting.server.context-path}
+  resources:
+    static-locations: classpath:/static/
+  x-frame-option: ${setting.server.x-frame-option:false}
+
+spring:
+  application:
+    name: spring-market
+  profiles:
+    active: default, setting
+
+  devtools:
+    restart:
+      enabled: false
+
+  ## rabbitmq setting ##
+  #rabbitmq:
+  #  host: ${setting.message-queue.host}
+  #  port: ${setting.message-queue.port}
+  #  username: ${setting.message-queue.username}
+  #  password: ${setting.message-queue.password}
+
+  ## minio setting ##
+  #minio:
+  #  host: ${setting.object-storage.host}
+  #  port: ${setting.object-storage.port}
+  #  access-key: ${setting.object-storage.access-key}
+  #  secret-key: ${setting.object-storage.secret-key}
+
+  ## database setting ##
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.db-name}?autoReconnect=true&charSet=${spring.datasource.chat-set}&currentSchema=${spring.datasource.current-schema}
+    current-schema: ${setting.database.rdbms.current-schema}
+    chat-set: ${setting.database.rdbms.chat-set}
+    username: ${setting.database.rdbms.username}
+    password: ${setting.database.rdbms.password}
+    host: ${setting.database.rdbms.host}
+    port: ${setting.database.rdbms.port}
+    db-name: ${setting.database.rdbms.db-name}
+
+  ## jpa setting ##
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+  sql:
+    init:
+      mode: never
+
+## JWT Setting ##
+jwt:
+  secret: "Q2hhbmdlVGhpcyBUb1lvdXJTdXBlclNlY3JldEtleTEyMzQ1Njc4OTA="
+  issuer: "spring-market"
+  access-token-expiration-ms: ${setting.auth.jwt.access-token-expiration-ms}
+  refresh-token-expiration-ms: ${setting.auth.jwt.refresh-token-expiration-ms}
+
+## LICENSE ##
+license:
+  validation-interval: 3600

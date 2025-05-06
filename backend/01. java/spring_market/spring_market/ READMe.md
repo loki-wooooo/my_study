@@ -21,3 +21,45 @@
       ├── module-server(메인 실행 모듈)
       │ ├── 실제로 서버를 실행하는 모듈로, 컨트롤러, 서비스, 애플리케이션 실행 진입
       │ ├── build.gradle(각 모듈의 dependency)
+
+  * spring market table 연관관계
+    * 테이블명	                    역할/설명	                                                주요 관계(→는 참조)
+      User	                        주문을 생성하는 고객(회원) 정보	                            1:N → Order
+      Order	                        주문  1건, 주문자, 주문일시, 상태, 배송지 등 포함	                N:1 → User
+                                                                                            1:N → OrderItem
+      OrderItem	                    주문 내 상품 1개(상품명, 옵션 요약, 수량, 가격 등)	            N:1 → Order
+                                                                                            N:1 → Product
+                                                                                            1:N → OrderItemOption
+                                                                                            1:N → OrderItemAdditionalProduct
+      OrderItemOption	            주문상품의 옵션 내역(색상, 사이즈 등)	                        N:1 → OrderItem
+      OrderItemAdditionalProduct	주문상품의 추가상품 내역(보증, 액세서리 등)	                    N:1 → OrderItem
+      Category	                    상품의 분류(대분류/중분류/소분류 등), 계층형 구조	                1:N → Product
+                                                                                            1:N → Category (자기참조)
+      Product	                    판매 상품(상품명, 설명, 가격, 재고 등)	                        N:1 → Category
+                                                                                            1:N → ProductOptionGroup
+                                                                                            1:N → AdditionalProduct
+                                                                                            1:N → OrderItem
+      ProductOptionGroup	        상품 옵션의 그룹(예: 색상, 사이즈 등)	                        N:1 → Product
+                                                                                            1:N → ProductOption
+      ProductOption	                옵션 그룹에 속한 실제 옵션 값(예: 빨강, 파랑, 소, 중, 대 등)	    N:1 → ProductOptionGroup
+      AdditionalProduct	            상품과 함께 구매 가능한 추가상품(예: 보증연장, 액세서리 등)	        N:1 → Product
+   
+    * 흐름도
+      * 주문
+      User (1) ──< (N) Order (1) ──< (N) OrderItem (1) ──< (N) OrderItemOption
+        │
+        └──< (N) OrderItemAdditionalProduct
+      * 상품
+      Category (1) ──< (N) Product (1) ──< (N) ProductOptionGroup (1) ──< (N) ProductOption
+        │
+        └──< (N) Category (자기참조, 계층형)
+      * 추가상품
+      Product (1) ──< (N) AdditionalProduct
+      * 주문서 상품정보
+      OrderItem (N) ──> (1) Product
+
+
+  * spring market API
+    * 카테고리는 있다는 가정(*)
+    * 상품 등록/수정/조회 API
+    * 주문 관련 API

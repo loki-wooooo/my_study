@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
 @MappedSuperclass
-public class CommonDto {
+public class CommonDto implements Serializable {
 
     Boolean isUse;
     LocalDateTime createdOn;

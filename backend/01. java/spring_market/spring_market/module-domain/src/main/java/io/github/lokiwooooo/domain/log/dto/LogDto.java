@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -15,13 +16,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
-
-public class LogDto extends CommonDto {
+public class LogDto extends CommonDto implements Serializable {
 
     Long id;
-    LogType logType;
-    LogDetailType logDetailType;
-    String logContent;
+    LogType type;
+    LogDetailType detailType;
+    String content;
     String ip;
     List<LogDto> logDtoList;
 }

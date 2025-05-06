@@ -1,0 +1,36 @@
+setting:
+
+  server:
+    port: 8087
+    context-path: /
+    x-frame-option: false
+
+  logging:
+    file-path: log_path
+
+  #message-queue:
+  #  host: 220.220.220.242
+  #  port: 5672
+  #  username: apuser
+  #  password: apuser
+
+  #object-storage:
+  #  host: 220.220.220.242
+  #  port: 9000
+  #  access-key: admin
+  #  secret-key: password
+
+  database:
+    rdbms:
+      host: 127.0.0.1
+      port: 5432
+      username: postgres
+      password: 1234
+      db-name: postgres
+      current-schema: spring_market
+      chat-set: UTF-8
+
+  auth:
+    jwt:
+      access-token-expiration-ms: 1800000      # 30분
+      refresh-token-expiration-ms: 1209600000  # 2주

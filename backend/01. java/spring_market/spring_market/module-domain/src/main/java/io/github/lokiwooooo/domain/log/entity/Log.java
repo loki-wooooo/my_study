@@ -23,21 +23,21 @@ public class Log extends CommonEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "LOG_ID", nullable = false, updatable = false)
     @Comment("Log Id")
-    String logId;
+    String id;
 
     @Column(name = "LOG_TYPE", nullable = true)
     @Comment("Log 타입")
     @Enumerated(EnumType.STRING)
-    LogType logType;
+    LogType type;
 
     @Column(name = "LOG_DETAIL_TYPE", nullable = true)
     @Comment("Log 상세 타입")
     @Enumerated(EnumType.STRING)
-    LogDetailType logDetailType;
+    LogDetailType detailType;
 
     @Column(name = "LOG_CONTENT", columnDefinition = "TEXT", nullable = true)
     @Comment("Log 내용")
-    String logContent;
+    String content;
 
     @Column(name = "LOG_IP", length = 5000, nullable = true)
     @Comment("Log IP")
