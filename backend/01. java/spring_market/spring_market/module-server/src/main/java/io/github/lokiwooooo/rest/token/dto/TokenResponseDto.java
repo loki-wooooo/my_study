@@ -1,14 +1,9 @@
-package io.github.lokiwooooo.domain.token.dto;
+package io.github.lokiwooooo.rest.token.dto;
 
-import io.github.lokiwooooo.domain.common.dto.CommonDto;
-
-
-import io.github.lokiwooooo.domain.user.dto.UserDto;
+import io.github.lokiwooooo.util.dto.ResponseCommonDto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -16,9 +11,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
-public class TokenDto extends CommonDto implements Serializable {
+public class TokenResponseDto extends ResponseCommonDto {
     String id;
     String accessToken;
     String refreshToken;
-    UserDto userDto;
 }
