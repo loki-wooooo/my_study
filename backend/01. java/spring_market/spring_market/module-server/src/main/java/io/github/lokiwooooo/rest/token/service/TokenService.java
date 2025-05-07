@@ -89,13 +89,17 @@ public class TokenService {
     public TokenResponseDto findByUserName(final TokenRequestDto tokenRequestDto) {
         Token token = tokenRepository.findByUserName(tokenRequestDto.getUserRequestDto().getName()).orElse(null);
         TokenDto tokenDto = tokenMapper.toDto(token);
-        return TokenResponseDto.builder()
-                .id(tokenDto.getId())
-                .accessToken(tokenDto.getAccessToken())
-                .refreshToken(tokenDto.getRefreshToken())
-                .isUse(tokenDto.getIsUse())
-                .httpStatus(HttpStatus.OK)
-                .build();
+        if(tokenDto == null) {
+            return null;
+        } else {
+            return TokenResponseDto.builder()
+                    .id(tokenDto.getId())
+                    .accessToken(tokenDto.getAccessToken())
+                    .refreshToken(tokenDto.getRefreshToken())
+                    .isUse(tokenDto.getIsUse())
+                    .httpStatus(HttpStatus.OK)
+                    .build();
+        }
     }
 
     public TokenResponseDto findByIsUseAndUserName(final TokenRequestDto tokenRequestDto) {

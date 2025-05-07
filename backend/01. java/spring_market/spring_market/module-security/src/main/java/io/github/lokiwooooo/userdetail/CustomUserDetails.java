@@ -54,7 +54,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false; // 계정 잠금 여부 (항상 잠금으로 처리됨)
+        return true; // 계정 잠금 여부 (항상 잠금으로 처리됨)
     }
 
     @Override

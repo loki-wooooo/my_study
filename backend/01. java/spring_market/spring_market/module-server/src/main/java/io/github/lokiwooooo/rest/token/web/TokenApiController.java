@@ -34,7 +34,7 @@ public class TokenApiController {
     @PostAnnotation
     @Operation(summary = "토큰 재발급", description = "사용자의 토큰을 재발급 처리합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "로그인 성공"),
+            @ApiResponse(responseCode = "200", description = "요청 성공"),
             @ApiResponse(responseCode = "401", description = "인증 실패"),
             @ApiResponse(responseCode = "403", description = "인가 실패"),
             @ApiResponse(responseCode = "404", description = "페이지 없음"),

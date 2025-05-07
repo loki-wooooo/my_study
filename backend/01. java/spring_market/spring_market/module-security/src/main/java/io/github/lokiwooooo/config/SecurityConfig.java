@@ -135,8 +135,8 @@ public class SecurityConfig {
 
     private String[] httpPostPermitAllURL() {
         String[] urls = {
-                "/rest/kit/v1/auth/login",
-                "/rest/kit/v1/token/refresh"
+                "/rest/market/v1/auth/login",
+                "/rest/market/v1/token/refresh"
         };
         return urls;
     }
