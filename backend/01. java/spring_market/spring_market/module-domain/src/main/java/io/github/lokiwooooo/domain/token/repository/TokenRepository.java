@@ -10,11 +10,11 @@ import java.util.Optional;
 @Repository
 public interface TokenRepository extends JpaRepository<Token, String> {
 
-    Optional<Token> findByRefreshToken(final String refreshToken) throws Exception;
+    Optional<Token> findByRefreshToken(final String refreshToken);
 
-    Optional<Token> findByUserName(final String userName) throws Exception;
+    Optional<Token> findByUserName(final String userName);
 
-    Optional<Token> findByIsUseAndUserName(final Boolean isUse, final String userName) throws Exception;
+    Optional<Token> findByIsUseAndUserName(final Boolean isUse, final String userName);
 
-    Optional<Token> findByIsUseAndAccessToken(final Boolean isUse, final String accessToken) throws Exception;
+    Optional<Token> findByIsUseAndAccessToken(final Boolean isUse, final String accessToken);
 }

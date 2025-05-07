@@ -1,9 +1,11 @@
-package io.github.lokiwooooo.rest.token.dto;
+package io.github.lokiwooooo.rest.user.dto;
 
 import io.github.lokiwooooo.util.dto.ResponseCommonDto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,9 +13,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
-public class TokenResponseDto extends ResponseCommonDto {
-    String id;
-    String accessToken;
-    String refreshToken;
-    Boolean isUse;
+public class UserListResponseDto extends ResponseCommonDto {
+    List<UserResponseDto> userResponseDtoList;
 }

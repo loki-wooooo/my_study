@@ -32,8 +32,6 @@ public class TokenService {
     JwtTokenProvider jwtTokenProvider;
     CustomUserDetailsService customUserDetailsService;
 
-
-    TokenService self;
     UserService userService;
 
     TokenRepository tokenRepository;
@@ -78,40 +76,41 @@ public class TokenService {
         tokenRepository.flush();
     }
 
-    public TokenResponseDto findByRefreshToken(final TokenDto tokenDto) throws Exception {
-        Token token = tokenRepository.findByRefreshToken(tokenDto.getRefreshToken()).orElse(null);
-        TokenDto tokenDtoData = tokenMapper.toDto(token);
+    public TokenResponseDto findByRefreshToken(final TokenRequestDto tokenRequestDto) {
+        Token token = tokenRepository.findByRefreshToken(tokenRequestDto.getRefreshToken()).orElse(null);
+        TokenDto tokenDto = tokenMapper.toDto(token);
         return TokenResponseDto.builder()
-                .accessToken(tokenDtoData.getAccessToken())
-                .refreshToken(tokenDtoData.getRefreshToken())
+                .accessToken(tokenDto.getAccessToken())
+                .refreshToken(tokenDto.getRefreshToken())
                 .httpStatus(HttpStatus.OK)
                 .build();
     }
 
-    public TokenResponseDto findByUserName(final TokenDto tokenDto) throws Exception {
-        Token token = tokenRepository.findByUserName(tokenDto.getUserDto().getName()).orElse(null);
-        TokenDto tokenDtoData = tokenMapper.toDto(token);
+    public TokenResponseDto findByUserName(final TokenRequestDto tokenRequestDto) {
+        Token token = tokenRepository.findByUserName(tokenRequestDto.getUserRequestDto().getName()).orElse(null);
+        TokenDto tokenDto = tokenMapper.toDto(token);
         return TokenResponseDto.builder()
-                .id(tokenDtoData.getId())
-                .accessToken(tokenDtoData.getAccessToken())
-                .refreshToken(tokenDtoData.getRefreshToken())
+                .id(tokenDto.getId())
+                .accessToken(tokenDto.getAccessToken())
+                .refreshToken(tokenDto.getRefreshToken())
+                .isUse(tokenDto.getIsUse())
                 .httpStatus(HttpStatus.OK)
                 .build();
     }
 
-    public TokenResponseDto findByIsUseAndUserName(final TokenDto tokenDto) throws Exception {
-        Token token = tokenRepository.findByIsUseAndUserName(tokenDto.getIsUse(), tokenDto.getUserDto().getName()).orElse(null);
-        TokenDto tokenDtoData = tokenMapper.toDto(token);
+    public TokenResponseDto findByIsUseAndUserName(final TokenRequestDto tokenRequestDto) {
+        Token token = tokenRepository.findByIsUseAndUserName(tokenRequestDto.getIsUse(), tokenRequestDto.getUserRequestDto().getName()).orElse(null);
+        TokenDto tokenDto = tokenMapper.toDto(token);
         return TokenResponseDto.builder()
-                .id(tokenDtoData.getId())
-                .accessToken(tokenDtoData.getAccessToken())
-                .refreshToken(tokenDtoData.getRefreshToken())
+                .id(tokenDto.getId())
+                .accessToken(tokenDto.getAccessToken())
+                .refreshToken(tokenDto.getRefreshToken())
                 .httpStatus(HttpStatus.OK)
                 .build();
     }
 
     // 토큰 재발급
-    public TokenResponseDto refreshToken(final TokenRequestDto tokenRequestDto) throws Exception {
+    public TokenResponseDto refreshToken(final TokenRequestDto tokenRequestDto) {
 
         // Step1. RefreshToken 유효성 검증
         if (!jwtTokenProvider.validateToken(tokenRequestDto.getRefreshToken())) {
@@ -122,7 +121,7 @@ public class TokenService {
         String username = jwtTokenProvider.getUsernameFromToken(tokenRequestDto.getRefreshToken());
 
         // Step.3 DB에 있는 refreshToken equals 현제 받은 refresh-token
-        TokenResponseDto tokenResponseDto = findByRefreshToken(TokenDto.builder().refreshToken(tokenRequestDto.getRefreshToken()).build());
+        TokenResponseDto tokenResponseDto = findByRefreshToken(tokenRequestDto);
         if (tokenResponseDto == null) {
             return TokenResponseDto.builder().httpStatus(HttpStatus.NOT_FOUND).build();
         }
@@ -145,14 +144,25 @@ public class TokenService {
 
         // Step5. Token 정보 삭제 후 재등록
         TokenRequestDto deleteTokenRequestDto = TokenRequestDto.builder().id(tokenResponseDto.getId()).accessToken(newAccessToken).refreshToken(newRefreshToken).build();
-        self.deleteToken(deleteTokenRequestDto);
+        tokenRepository.deleteById(deleteTokenRequestDto.getId());
 
         TokenRequestDto insertTokenRequestDto = TokenRequestDto.builder()
                 .userRequestDto(UserRequestDto.builder().id(userResponseDto.getId()).name(userResponseDto.getName()).email(userResponseDto.getEmail()).build())
                 .accessToken(newAccessToken)
                 .refreshToken(newRefreshToken)
                 .build();
-        self.insertToken(insertTokenRequestDto);
+        TokenDto tokenDto = TokenDto.builder()
+                .createdOn(LocalDateTime.now())
+                .createdUserId(insertTokenRequestDto.getUserRequestDto().getId())
+                .createdUserName(insertTokenRequestDto.getUserRequestDto().getName())
+                .isUse(true)
+                .lastEditedOn(LocalDateTime.now())
+                .lastEditedUserId(insertTokenRequestDto.getUserRequestDto().getId())
+                .lastEditedUserName(insertTokenRequestDto.getUserRequestDto().getName())
+                .accessToken(insertTokenRequestDto.getAccessToken())
+                .refreshToken(insertTokenRequestDto.getRefreshToken())
+                .build();
+        tokenRepository.save(tokenMapper.toEntity(tokenDto));
 
         return TokenResponseDto.builder().accessToken(newAccessToken).refreshToken(newRefreshToken).build();
     }
