@@ -149,7 +149,7 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(jwtProperties.secret().getBytes(StandardCharsets.UTF_8));
     }
 
-    // JWT의 특정 클래임을 갖고옴
+    // JWT의 사용자명을 갖고옴
     public String getUsernameFromToken(final String token) {
         // Claims 추출
         Claims claims = Jwts.parser()
@@ -164,5 +164,16 @@ public class JwtTokenProvider {
         // 만약 username을 별도 claim("username")에 저장했다면
         // return claims.get("username", String.class);
     }
+
+    public String getClaims(final String token, final String key) {
+        // Claims 추출
+        Claims claims = Jwts.parser()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+        return claims.get(key, String.class);
+    }
+
 
 }

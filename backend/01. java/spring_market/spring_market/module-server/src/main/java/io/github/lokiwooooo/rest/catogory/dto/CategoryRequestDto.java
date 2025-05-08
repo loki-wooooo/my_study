@@ -6,7 +6,7 @@ import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
-@SuperBuilder
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
@@ -14,4 +14,6 @@ public class CategoryRequestDto {
     String id;
     String name;
     String level;
+    String parentId;
+    Boolean isUse;
 }

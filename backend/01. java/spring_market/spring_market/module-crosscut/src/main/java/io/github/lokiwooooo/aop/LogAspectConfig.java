@@ -6,6 +6,7 @@ import io.github.lokiwooooo.domain.log.entity.LogDetailType;
 import io.github.lokiwooooo.domain.log.entity.LogType;
 import io.github.lokiwooooo.domain.log.repository.LogMapper;
 import io.github.lokiwooooo.domain.log.repository.LogRepository;
+import io.github.lokiwooooo.security.TokenUserExtractor;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.Inet4Address;
+import java.util.Enumeration;
 
 
 @Slf4j
@@ -30,8 +37,11 @@ import java.time.format.DateTimeFormatter;
 public class LogAspectConfig {
 
     private static final String UNKNOWN = "unknown";
+
     LogMapper logMapper;
     LogRepository logRepository;
+    TokenUserExtractor tokenUserExtractor;
+
 
     // POST 요청 로깅
     @Around("@annotation(io.github.lokiwooooo.annotaion.PostAnnotation)")
@@ -112,13 +122,19 @@ public class LogAspectConfig {
     private void insertLogs(final HttpServletRequest request,
                             final LogDetailType logDetailType,
                             final String logContent) {
-        String userName = request.getRemoteUser();
+        String userName = "SYSTEM_USER";
+        String userId = "SYSTEM_USER_ID";
         String requestIp = getClientIp(request);
 
-        if (userName == null) {
-            userName = "SYSTEM_USER";
+        // JWT 토큰에서 사용자 정보 추출
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            userName = tokenUserExtractor.getUserName(token);
+            userId = tokenUserExtractor.getUserId(token);
         }
 
+        // logging
         LogDto logDto = LogDto.builder()
                 .type(LogType.API)
                 .detailType(logDetailType)
@@ -126,8 +142,10 @@ public class LogAspectConfig {
                 .ip(requestIp)
                 .isUse(true)
                 .createdOn(LocalDateTime.now())
-                .lastEditedOn(LocalDateTime.now())
+                .createdUserId(userId)
                 .createdUserName(userName)
+                .lastEditedOn(LocalDateTime.now())
+                .lastEditedUserId(userId)
                 .lastEditedUserName(userName)
                 .build();
 
@@ -145,30 +163,37 @@ public class LogAspectConfig {
     /**
      * Client IP 관련 확인
      */
-    public String getClientIp(final HttpServletRequest httpServletRequest) {
-        String ip = httpServletRequest.getHeader("x-original-forwarded-for");
-
+    public String getClientIp(final HttpServletRequest request) {
+        String ip = request.getHeader("X-Forwarded-For");
+        
         if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = httpServletRequest.getHeader("Proxy-Client-IP");
+            ip = request.getRemoteAddr();
+            if (ip.equals("0:0:0:0:0:0:0:1") || ip.equals("::1") || ip.equals("127.0.0.1")) {
+                try {
+                    // 모든 네트워크 인터페이스 조회
+                    Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+                    while (interfaces.hasMoreElements()) {
+                        NetworkInterface ni = interfaces.nextElement();
+                        // 활성화되어 있고 루프백이 아닌 인터페이스만 확인
+                        if (!ni.isLoopback() && ni.isUp()) {
+                            Enumeration<InetAddress> addresses = ni.getInetAddresses();
+                            while (addresses.hasMoreElements()) {
+                                InetAddress addr = addresses.nextElement();
+                                // IPv4 주소만 처리
+                                if (addr instanceof Inet4Address) {
+                                    ip = addr.getHostAddress();
+                                    return ip;
+                                }
+                            }
+                        }
+                    }
+                } catch (SocketException e) {
+                    log.warn("네트워크 인터페이스 조회 중 오류 발생", e);
+                }
+            }
         }
-
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = httpServletRequest.getHeader("WL-Proxy-Client-IP");
-        }
-
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = httpServletRequest.getHeader("HTTP_CLIENT_IP");
-        }
-
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = httpServletRequest.getHeader("HTTP_X_FORWARDED_FOR");
-        }
-
-        if (ip == null || ip.isEmpty() || UNKNOWN.equalsIgnoreCase(ip)) {
-            ip = httpServletRequest.getRemoteAddr().toLowerCase();
-        }
-
-        return ip;
+        
+        return ip.trim();
     }
 
 }

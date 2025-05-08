@@ -45,8 +45,7 @@ public class TokenApiController {
     ) {
         //header에 있는 refresh token 취득
         TokenRequestDto tokenRequestDto = TokenRequestDto.builder().refreshToken(refreshToken).build();
-        TokenResponseDto tokenResponseDto = tokenService.refreshToken(tokenRequestDto);
-        return new ResponseEntity<>(tokenResponseDto, HttpStatus.OK);
+        return ResponseEntity.ok(tokenService.refreshToken(tokenRequestDto));
     }
 
 }

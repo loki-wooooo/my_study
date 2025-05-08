@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
 @Slf4j
-@RequestMapping(path = "/rest/market/v1/user")
+@RequestMapping(path = "/rest/market/v1/users")
 public class UserApiController {
 
     UserService userService;
@@ -63,10 +63,7 @@ public class UserApiController {
             @AuthenticationPrincipal final CustomUserDetails customUserDetails
             , @PathVariable final String id
     ) {
-        UserResponseDto userResponseDto = userService.findById(customUserDetails, id);
-        return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
+        return ResponseEntity.ok(userService.findById(customUserDetails, id));
     }
-
-
 
 }

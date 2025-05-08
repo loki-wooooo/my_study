@@ -3,6 +3,8 @@ buildscript {
         log4j2JdbcVersion = "1.16"
         jakartaeeApiVersion = "10.0.0"
         openApiVersion= "2.3.0"
+        mapStructVersion='1.5.5.Final'
+        mapStructBindingVersion='0.2.0'
     }
 }
 
@@ -44,6 +46,9 @@ dependencies {
     implementation(project(":module-common"))
     implementation(project(":module-domain"))
     implementation(project(":module-crosscut"))
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${mapStructBindingVersion}"
 
 }
 

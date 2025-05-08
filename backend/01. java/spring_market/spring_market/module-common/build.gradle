@@ -23,6 +23,7 @@ dependencies {
 
     //multipart-file 파싱에 필요함
     implementation 'org.springframework:spring-web'
+    implementation 'org.springframework:spring-context'
 
     // 암/복호화 유틸리티 라이브러리
     implementation "org.jasypt:jasypt:${jasyptVersion}"

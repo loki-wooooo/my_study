@@ -14,7 +14,6 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +41,7 @@ public class LoginApiController {
     public ResponseEntity<LoginResponseDto> login(
             @RequestBody final LoginRequestDto loginRequestDto
     ) {
-        LoginResponseDto loginResponseDto = loginService.login(loginRequestDto);
-        return new ResponseEntity<>(loginResponseDto, HttpStatus.OK);
+        return ResponseEntity.ok(loginService.login(loginRequestDto));
     }
 
     @GetMapping("/logout")
@@ -59,8 +57,7 @@ public class LoginApiController {
     public ResponseEntity<LoginResponseDto> logout(
             @AuthenticationPrincipal final CustomUserDetails customUserDetails
     ) throws Exception {
-        LoginResponseDto loginResponseDto = loginService.logout(customUserDetails);
-        return new ResponseEntity<>(loginResponseDto, HttpStatus.OK);
+        return ResponseEntity.ok(loginService.logout(customUserDetails));
     }
 
 }
