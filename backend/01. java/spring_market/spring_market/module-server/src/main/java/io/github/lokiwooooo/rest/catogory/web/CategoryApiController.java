@@ -43,7 +43,7 @@ public class CategoryApiController {
             @ApiResponse(responseCode = "404", description = "페이지 없음"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public ResponseEntity<CategoryListResponseDto> logout(
+    public ResponseEntity<CategoryListResponseDto> findAll(
             @AuthenticationPrincipal final CustomUserDetails customUserDetails
             , @ModelAttribute final CategoryRequestDto categoryRequestDto
     ) {
@@ -60,7 +60,7 @@ public class CategoryApiController {
             @ApiResponse(responseCode = "404", description = "페이지 없음"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public ResponseEntity<CategoryResponseDto> logout(
+    public ResponseEntity<CategoryResponseDto> findById(
             @AuthenticationPrincipal final CustomUserDetails customUserDetails
             , @PathVariable final String id
             , @Valid @ModelAttribute final CategoryRequestDto categoryRequestDto

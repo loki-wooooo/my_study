@@ -40,7 +40,7 @@ public class ProductOptionGroup extends CommonEntity {
     Product product;
 
     @OneToMany(mappedBy = "productOptionGroup", cascade = CascadeType.ALL)
-    List<ProductOption> productOption = new ArrayList<>();
+    List<ProductOption> productOptionList = new ArrayList<>();
 
 
 }

@@ -1,7 +1,9 @@
-package io.github.lokiwooooo.rest.catogory.dto;
+package io.github.lokiwooooo.rest.additionalproduct.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -9,10 +11,10 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
-public class CategoryRequestDto {
+public class AdditionalProductRequestDto {
     String id;
+    String productId;
     String name;
-    String level;
-    String parentId;
-    Boolean isUse;
+    BigDecimal price;
+    Integer stock;
 }

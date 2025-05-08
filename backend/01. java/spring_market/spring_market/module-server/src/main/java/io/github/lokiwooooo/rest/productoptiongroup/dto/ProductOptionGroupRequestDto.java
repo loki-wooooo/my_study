@@ -1,4 +1,4 @@
-package io.github.lokiwooooo.rest.catogory.dto;
+package io.github.lokiwooooo.rest.productoptiongroup.dto;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -9,10 +9,8 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
-public class CategoryRequestDto {
+public class ProductOptionGroupRequestDto {
     String id;
+    String productId;
     String name;
-    String level;
-    String parentId;
-    Boolean isUse;
 }

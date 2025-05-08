@@ -3,7 +3,7 @@ package io.github.lokiwooooo.domain.product.dto;
 import io.github.lokiwooooo.domain.additionalproduct.dto.AdditionalProductDto;
 import io.github.lokiwooooo.domain.category.dto.CategoryDto;
 import io.github.lokiwooooo.domain.common.dto.CommonDto;
-import io.github.lokiwooooo.domain.productoption.dto.ProductOptionDto;
+import io.github.lokiwooooo.domain.productoptiongroup.dto.ProductOptionGroupDto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
@@ -25,6 +25,6 @@ public class ProductDto extends CommonDto implements Serializable {
     BigDecimal price;
     Integer stock;
     CategoryDto categoryDto;
-    List<ProductOptionDto> productOptionDtoList;
+    List<ProductOptionGroupDto> productOptionGroupDtoList;
     List<AdditionalProductDto> additionalProductDtoList;
 }

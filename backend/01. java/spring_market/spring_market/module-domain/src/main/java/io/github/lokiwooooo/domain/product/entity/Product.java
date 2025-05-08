@@ -59,10 +59,10 @@ public class Product extends CommonEntity {
 
     //상품 옵션과 1:N
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<ProductOptionGroup> productOptionGroup = new ArrayList<>();
+    List<ProductOptionGroup> productOptionGroupList = new ArrayList<>();
 
     //추가 상품과 1:N
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<AdditionalProduct> additionalProducts = new ArrayList<>();
+    List<AdditionalProduct> additionalProductList = new ArrayList<>();
 
 }

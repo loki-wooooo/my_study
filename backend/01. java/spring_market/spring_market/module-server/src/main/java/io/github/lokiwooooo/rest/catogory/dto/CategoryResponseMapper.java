@@ -13,7 +13,9 @@ public interface CategoryResponseMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "level", target = "level")
     @Mapping(source = "parent", target = "parent")
+    @Mapping(source = "parentId", target = "parentId")
     @Mapping(source = "children", target = "children")
+    @Mapping(target = "httpStatus", ignore = true)
     CategoryResponseDto toResponseDto(final CategoryDto categoryDto);
 
     List<CategoryResponseDto> toResponseDtoList(final List<CategoryDto> categoryDtoList);

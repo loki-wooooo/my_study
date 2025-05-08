@@ -36,5 +36,5 @@ setting:
 
   auth:
     jwt:
-      access-token-expiration-ms: 1800000      # 30분
+      access-token-expiration-ms: 36000000      # 10시간
       refresh-token-expiration-ms: 1209600000  # 2주
