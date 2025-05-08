@@ -19,6 +19,7 @@ import java.util.List;
 public class ProductOptionGroupDto extends CommonDto implements Serializable {
     String id;
     String name;
+    String productId;
     ProductDto productDto;
     List<ProductOptionDto> productOptionDtoList;
 }

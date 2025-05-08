@@ -1,5 +1,6 @@
 package io.github.lokiwooooo.rest.product.dto;
 
+import io.github.lokiwooooo.domain.additionalproduct.dto.AdditionalProductDto;
 import io.github.lokiwooooo.domain.product.dto.ProductDto;
 import io.github.lokiwooooo.domain.productoption.dto.ProductOptionDto;
 import io.github.lokiwooooo.domain.productoptiongroup.dto.ProductOptionGroupDto;
@@ -21,5 +22,5 @@ public interface ProductResponseMapper {
 
     ProductOptionResponseDto toProductOptionResponseDto(ProductOptionDto productOptionDto);
 
-    AdditionalProductResponseDto toAdditionalProductResponseDto(ProductDto productDto);
+    AdditionalProductResponseDto toAdditionalProductResponseDto(AdditionalProductDto additionalProductDto);
 }

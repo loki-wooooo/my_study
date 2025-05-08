@@ -29,7 +29,9 @@ public class OrderItemAdditionalProduct extends CommonEntity {
     @Comment("주문 추가 상품 Id")
     String id;
 
-    private String additionalProductName;  // 예: "보증연장"
+    @Column(name = "ORDER_ITEM_ADDITIONAL_PRODUCT_NAME", nullable = false)
+    @Comment("주문 추가 상품 명")
+    String name;  // 예: "보증연장"
 
     @Column(name = "ORDER_ITEM_OPTION_PRODUCT_OPTION_ADDITIONAL_PRICE", nullable = false, precision = 12, scale = 2)
     @Comment("주문 추가 상품 가격")

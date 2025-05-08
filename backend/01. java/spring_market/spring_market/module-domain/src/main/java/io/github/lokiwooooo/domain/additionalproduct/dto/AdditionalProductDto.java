@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 public class AdditionalProductDto extends CommonDto implements Serializable {
 
     String id;
+    String productId;
     String name;
     BigDecimal price;
     Integer stock;

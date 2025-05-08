@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
 public class ProductOptionDto extends CommonDto implements Serializable {
     String id;
+    String productOptionGroupId;
     BigDecimal price;
     String value;
     Integer stock;

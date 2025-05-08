@@ -1,4 +1,4 @@
-package io.github.lokiwooooo.rest.productoption.dto;
+package io.github.lokiwooooo.rest.orderitemoption.dto;
 
 import io.github.lokiwooooo.util.dto.ResponseCommonDto;
 import lombok.*;
@@ -13,10 +13,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
-public class ProductOptionResponseDto extends ResponseCommonDto {
+public class OrderItemOptionResponseDto extends ResponseCommonDto {
     String id;
-    String productOptionGroupId;
-    BigDecimal price;
+    String name;
     String value;
-    Integer stock;
+    BigDecimal additionalPrice;
 }

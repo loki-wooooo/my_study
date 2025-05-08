@@ -1,12 +1,10 @@
-package io.github.lokiwooooo.domain.orderitemadditionalproduct.dto;
+package io.github.lokiwooooo.rest.orderitem.dto;
 
-import io.github.lokiwooooo.domain.common.dto.CommonDto;
-import io.github.lokiwooooo.domain.orderitem.dto.OrderItemDto;
+import io.github.lokiwooooo.util.dto.ResponseCommonDto;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Getter
@@ -15,11 +13,10 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
-public class OrderItemAdditionalProductDto extends CommonDto implements Serializable {
-
+public class OrderItemResponseDto extends ResponseCommonDto {
     String id;
     String name;
+    String content;
     BigDecimal price;
     Integer quantity;
-    OrderItemDto orderItemDto;
 }

@@ -77,6 +77,20 @@ public class ProductService {
         return productResponseMapper.toResponseDto(productDto);
     }
 
+    //재고수정
+    @Transactional
+    public ProductResponseDto updateStock(final CustomUserDetails customUserDetails, final ProductRequestDto productRequestDto) {
+
+        Product product = productRepository.findById(productRequestDto.getId()).orElseThrow(() -> new IllegalArgumentException("상품ID를 확인해 주세요: " + productRequestDto.getId()));
+        product.setStock(productRequestDto.getStock());
+        productRepository.save(product);
+
+        return ProductResponseDto.builder()
+                .id(product.getId().toString())
+                .stock(product.getStock())
+                .build();
+    }
+
     // 생성, 수정, 삭제는 나중에
 
 }

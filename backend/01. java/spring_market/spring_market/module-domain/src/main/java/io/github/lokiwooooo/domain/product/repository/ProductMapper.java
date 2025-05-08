@@ -21,10 +21,13 @@ public interface ProductMapper extends GenericMapper<ProductDto, Product> {
     ProductDto toDto(Product product);
 
     @Mapping(source = "productOptionList", target = "productOptionDtoList")
+    @Mapping(source = "product.id", target = "productId")
     ProductOptionGroupDto toDto(ProductOptionGroup productOptionGroup);
 
+    @Mapping(source = "productOptionGroup.id", target = "productOptionGroupId")
     ProductOptionDto toDto(ProductOption productOption);
 
+    @Mapping(source = "product.id", target = "productId")
     AdditionalProductDto toDto(AdditionalProduct additionalProduct);
 
     @Mapping(source = "categoryDto", target = "category")
