@@ -55,7 +55,7 @@ public class Order extends CommonEntity {
     @JoinColumn(name = "USER_ID")
     User user;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    List<OrderItem> orderItems = new ArrayList<>();
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<OrderItem> orderItemList = new ArrayList<>();
 
 }

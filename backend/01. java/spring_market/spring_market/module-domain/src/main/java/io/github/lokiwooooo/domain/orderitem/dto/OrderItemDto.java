@@ -25,7 +25,9 @@ public class OrderItemDto extends CommonDto implements Serializable {
     String content;
     BigDecimal price;
     Integer quantity;
-    OrderDto orderDto;
+//    OrderDto orderDto;
+    String orderId;
+    String productId;
     ProductDto productDto;
     List<OrderItemOptionDto> orderItemOptionDtoList;
     List<OrderItemAdditionalProductDto> orderItemAdditionalProductDtoList;

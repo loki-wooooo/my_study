@@ -59,9 +59,9 @@ public class OrderItem extends CommonEntity {
     @JoinColumn(name = "PRODUCT_ID")
     Product product = new Product();
 
-    @OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderItemOption> orderItemOptionList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL, orphanRemoval = true)
     List<OrderItemAdditionalProduct> orderItemAdditionalProductList = new ArrayList<>();
 }

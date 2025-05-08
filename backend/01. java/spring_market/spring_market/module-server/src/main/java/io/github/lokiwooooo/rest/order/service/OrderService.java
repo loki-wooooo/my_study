@@ -1,10 +1,12 @@
 package io.github.lokiwooooo.rest.order.service;
 
 import io.github.lokiwooooo.domain.order.dto.OrderDto;
+import io.github.lokiwooooo.domain.order.entity.Order;
 import io.github.lokiwooooo.domain.order.entity.OrderStatus;
 import io.github.lokiwooooo.domain.order.repository.OrderMapper;
 import io.github.lokiwooooo.domain.order.repository.OrderRepository;
 import io.github.lokiwooooo.domain.orderitem.dto.OrderItemDto;
+import io.github.lokiwooooo.domain.orderitem.repository.OrderItemRepository;
 import io.github.lokiwooooo.domain.orderitemadditionalproduct.dto.OrderItemAdditionalProductDto;
 import io.github.lokiwooooo.domain.orderitemoption.dto.OrderItemOptionDto;
 import io.github.lokiwooooo.domain.product.dto.ProductDto;
@@ -15,10 +17,10 @@ import io.github.lokiwooooo.rest.additionalproduct.service.AdditionalProductServ
 import io.github.lokiwooooo.rest.order.dto.OrderRequestDto;
 import io.github.lokiwooooo.rest.order.dto.OrderResponseDto;
 import io.github.lokiwooooo.rest.orderitem.dto.OrderItemRequestDto;
+import io.github.lokiwooooo.rest.orderitem.service.OrderItemService;
 import io.github.lokiwooooo.rest.orderitemadditionalproduct.dto.OrderItemAdditionalProductRequestDto;
 import io.github.lokiwooooo.rest.orderitemoption.dto.OrderItemOptionRequestDto;
 import io.github.lokiwooooo.rest.product.dto.ProductRequestDto;
-import io.github.lokiwooooo.rest.product.dto.ProductRequestMapper;
 import io.github.lokiwooooo.rest.product.dto.ProductResponseDto;
 import io.github.lokiwooooo.rest.product.service.ProductService;
 import io.github.lokiwooooo.rest.productoption.dto.ProductOptionRequestDto;
@@ -38,7 +40,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -54,6 +55,7 @@ public class OrderService {
     ProductService productService;
     ProductOptionService productOptionService;
     AdditionalProductService additionalProductService;
+    OrderItemService orderItemService;
 
 
     @Transactional
@@ -73,6 +75,7 @@ public class OrderService {
         OrderDto orderDto = OrderDto.builder()
                 .date(LocalDateTime.now())
                 .address(orderRequestDto.getAddress())
+                .totalPrice(BigDecimal.ZERO)
                 .status(OrderStatus.CREATED)
                 .isUse(true)
                 .userDto(userDto)
@@ -83,6 +86,10 @@ public class OrderService {
                 .lastEditedUserId(userDto.getId())
                 .lastEditedUserName(userDto.getName())
                 .build();
+
+        //초기 order 저장
+        Order saveOrder = orderRepository.save(orderMapper.toEntity(orderDto));
+        orderDto.setId(saveOrder.getId());
 
         // 주문 상품 목록 처리
         List<OrderItemDto> orderItemDtoList = new ArrayList<>();
@@ -164,6 +171,9 @@ public class OrderService {
                         .content(productDto.getContent())
                         .price(productDto.getPrice())
                         .quantity(orderItemRequestDto.getQuantity())
+//                        .productDto(productDto)
+                        .productId(productDto.getId())
+                        .orderId(orderDto.getId())
                         .isUse(true)
                         .createdOn(LocalDateTime.now())
                         .createdUserId(userDto.getId())
@@ -172,6 +182,9 @@ public class OrderService {
                         .lastEditedUserId(userDto.getId())
                         .lastEditedUserName(userDto.getName())
                         .build();
+
+                OrderResponseDto orderResponseDto = orderItemService.createByDto(customUserDetails, orderItemDto);
+                orderItemDto.setId(orderResponseDto.getId());
 
                 // 기본 상품 가격 계산 (상품가격 * 상품 갯수)
                 BigDecimal itemTotalPrice = productDto.getPrice().multiply(BigDecimal.valueOf(orderItemRequestDto.getQuantity()));
@@ -199,6 +212,8 @@ public class OrderService {
                                 .name(productDto.getName()) // 상품명
                                 .value(productOptionResponseDto.getValue()) // 옵션 명
                                 .additionalPrice(productOptionResponseDto.getPrice()) //옵션 추가값
+                                .orderItemDto(orderItemDto)
+                                .orderItemId(orderItemDto.getId())
                                 .isUse(true)
                                 .createdOn(LocalDateTime.now())
                                 .createdUserId(userDto.getId())
@@ -236,6 +251,8 @@ public class OrderService {
                                 .name(additionalProductResponseDto.getName())
                                 .price(additionalProductRequestDto.getPrice())
                                 .quantity(additionalProductRequestDto.getQuantity())
+                                .orderItemDto(orderItemDto)
+                                .orderItemId(orderItemDto.getId())
                                 .isUse(true)
                                 .createdOn(LocalDateTime.now())
                                 .createdUserId(userDto.getId())
@@ -319,7 +336,6 @@ public class OrderService {
         // 주문 DTO에 아이템 목록과 총 가격 설정
         orderDto.setOrderItemDtoList(orderItemDtoList);
         orderDto.setTotalPrice(totalPrice);
-
         orderRepository.save(orderMapper.toEntity(orderDto));
 
         return OrderResponseDto.builder()

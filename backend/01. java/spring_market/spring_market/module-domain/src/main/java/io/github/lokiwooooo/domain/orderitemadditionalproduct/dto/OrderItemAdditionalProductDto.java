@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 public class OrderItemAdditionalProductDto extends CommonDto implements Serializable {
 
     String id;
+    String orderItemId;
     String name;
     BigDecimal price;
     Integer quantity;
