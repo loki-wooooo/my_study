@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+    <!-- 로그 출력 패턴 -->
+    <property name="LOG_PATTERN"
+              value="%green([%d{yyyy-MM-dd HH:mm:ss.SSS}:%-3relative]) %highlight([%-5level]) %yellow([%thread]) %cyan([%logger{40}]) - %msg %n"
+    />
+
+    <!-- 로그 레벨 -->
+    <!--
+    	1) ERROR : 오류 메시지 표시
+        2) WARN  : 경고성 메시지 표시
+        3) INFO  : 정보성 메시지 표시
+        4) DEBUG : 디버깅하기 위한 메시지 표시
+        5) TRACE : Debug보다 훨씬 상세한 메시지 표시
+        아래에서는 info로 설정하였는데, 이 경우엔 INFO보다 위에 있는 DEBUG와 TRACE는 표시하지 않는다.
+    -->
+    <property name="LOG_LEVEL" value="INFO"/>
+
+    <!-- 특정 패키지 관련 logging 설정 -->
+    <logger name="io.github.lokiwooooo.**" level="DEBUG"></logger>
+
+
+    <logger name="org.springframework.web" level="DEBUG"></logger>
+    <logger name="org.springframework.security.**" level="DEBUG"></logger>
+    <logger name="org.mybatis.**" level="DEBUG"></logger>
+
+    <!-- Kubernetes 관련 로깅 추가 -->
+    <Logger name="io.kubernetes.**" level="DEBUG"/>
+
+    <logger name="java.sql.Connection" level="DEBUG"></logger>
+    <logger name="java.sql.Statement" level="DEBUG"></logger>
+    <logger name="java.sql.PreparedStatement" level="DEBUG"></logger>
+    <logger name="java.sql.ResultSet" level="DEBUG"></logger>
+
+    <!-- CONSOLE에 로그 출력 세팅 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <withJansi>false</withJansi>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 로그 전역 세팅 -->
+    <root level="${LOG_LEVEL}">
+        <!-- 위에 설정한 콘솔 설정 추가 -->
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

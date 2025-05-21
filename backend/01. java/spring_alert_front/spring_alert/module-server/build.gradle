@@ -1,0 +1,57 @@
+buildscript {
+    ext {
+        log4j2JdbcVersion = "1.16"
+        jakartaeeApiVersion = "10.0.0"
+        openApiVersion= "2.3.0"
+        mapStructVersion='1.5.5.Final'
+        mapStructBindingVersion='0.2.0'
+    }
+}
+
+plugins {
+    id "java"
+}
+
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
+dependencies {
+
+    // Spring Boot Starters
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:${log4j2JdbcVersion}"
+
+    //springfox-swagger
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${openApiVersion}"
+
+    //h2 database 추가
+    implementation 'com.h2database:h2'
+
+    // Configuration Properties
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    // Jakarta EE
+    implementation "jakarta.platform:jakarta.jakartaee-api:${jakartaeeApiVersion}"
+
+    // Development Tools
+    developmentOnly "org.springframework.boot:spring-boot-devtools"
+
+    // Test Dependencies
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+
+    implementation(project(":module-infra"))
+    implementation(project(":module-common"))
+    implementation(project(":module-domain"))
+    implementation(project(":module-crosscut"))
+
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${mapStructBindingVersion}"
+
+}
+
+// Configuration Processor가 생성하는 메타데이터 파일을 JAR에서 제외
+tasks.named("jar") {
+    exclude "META-INF/spring-configuration-metadata.json"
+}

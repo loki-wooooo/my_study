@@ -1,0 +1,29 @@
+buildscript {
+    ext {
+        jasyptVersion = "1.9.3"
+        mybatisVersion = "3.0.3"
+        minioVersion = '8.5.7'
+    }
+}
+
+plugins {
+    id "java-library"
+}
+
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+
+bootJar.enabled = false
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'com.h2database:h2'
+    implementation "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisVersion}"
+    implementation "com.zaxxer:HikariCP"
+
+    // 암/복호화 유틸리티 라이브러리
+    implementation "org.jasypt:jasypt:${jasyptVersion}"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    implementation(project(":module-domain"))
+}

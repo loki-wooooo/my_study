@@ -1,0 +1,74 @@
+// 하위 프로젝트의 버전 명시
+buildscript {
+    ext {
+        lombokVersion = '1.18.32'
+        mockitoCoreVersion = '5.8.0'
+        junitBomVersion = '5.10.0'
+    }
+}
+
+plugins {
+    id 'java' // 루트 프로젝트는 일반 Java 프로젝트로 설정
+    id 'org.springframework.boot' version '3.2.3' apply false // 플러그인이 즉시 적용되지 않고, 버전만 정의됩니다
+    id 'io.spring.dependency-management' version '1.1.4' apply false
+}
+
+// 모든 하위 모듈에 공통으로 적용될 설정
+subprojects {
+    apply plugin: 'java' // 모든 모듈에 Java 플러그인 적용
+
+    group = 'io.github.lokiwooooo'  // 그룹명
+    version = '0.0.1-SNAPSHOT'  // 버전
+
+    // 자바 버전 및 인코딩 설정 (모든 모듈에 적용)
+    // 자바 버전 및 인코딩 설정 (Gradle 공식 DSL)
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(21)
+        }
+    }
+
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+    }
+
+    // 테스트 실행 환경도 UTF-8로 강제
+    tasks.withType(Test).configureEach {
+        systemProperty 'file.encoding', 'UTF-8'
+        useJUnitPlatform()
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+    }
+
+    repositories {
+        mavenCentral() // 모든 모듈에서 메이븐 중앙 저장소 사용
+    }
+
+    // 모든 모듈에 공통으로 추가될 의존성
+    dependencies {
+
+        // Lombok (컴파일 시에만 필요)
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+        // 테스트 관련 의존성 (모든 모듈 공통)
+        testImplementation platform("org.junit:junit-bom:${junitBomVersion}")
+
+        testImplementation "org.junit.jupiter:junit-jupiter"
+        testImplementation "org.mockito:mockito-core:${mockitoCoreVersion}" // Mockito 추가 권장
+    }
+
+    // 테스트 설정 (모든 모듈 공통)
+    test {
+        useJUnitPlatform()
+        testLogging {
+            events "passed", "skipped", "failed"
+        }
+    }
+}
+
+// 루트 프로젝트 자체에는 의존성 추가하지 않음
+dependencies {
+    // 루트 프로젝트에만 필요한 의존성이 있다면 여기에 추가
+}

@@ -1,0 +1,20 @@
+setting:
+
+  server:
+    port: 8087
+    context-path: /
+
+  logging:
+    file-path: /utils/04.work/04.my_work/my_study/backend/01. java/spring_alert_front/spring_alert/module-server/src/main/resources/config/logback.xml
+
+  database:
+    rdbms:
+      schema: testdb    # db-name 대신 schema로 변경
+      username: sa
+      password:
+      current-schema: PUBLIC
+      ddl-auto: create-drop
+
+    sql:
+      init:
+        mode: always
