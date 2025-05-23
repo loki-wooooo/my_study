@@ -24,7 +24,7 @@ subprojects {
     // 자바 버전 및 인코딩 설정 (Gradle 공식 DSL)
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(21)
+            languageVersion = JavaLanguageVersion.of(17)
         }
     }
 

@@ -28,31 +28,31 @@ import java.time.LocalDateTime;
 
 public class CommonEntity implements Serializable {
 
-    @Column(name = "IS_USE", nullable = false)
-    @Comment("사용 여부")
-    @Builder.Default
-    Boolean isUse = true;
+//    @Column(name = "IS_USE", nullable = false)
+//    @Comment("사용 여부")
+//    @Builder.Default
+//    Boolean isUse = true;
 
     @CreatedDate
     @Column(name = "CREATED_ON", nullable = false, updatable = false)
     @Comment("생성일")
     LocalDateTime createdOn;
 
-    @CreatedBy
-    @Column(name = "CREATED_USER_NAME", length = 200, nullable = true, updatable = false)
-    @Comment("생성자명")
-    @Builder.Default
-    String createdUserName = "SYSTEM_USER";
+//    @CreatedBy
+//    @Column(name = "CREATED_USER_NAME", length = 200, nullable = true, updatable = false)
+//    @Comment("생성자명")
+//    @Builder.Default
+//    String createdUserName = "SYSTEM_USER";
 
     @LastModifiedDate
     @Column(name = "LAST_EDITED_ON", nullable = false)
     @Comment("수정일")
     LocalDateTime lastEditedOn;
 
-    @LastModifiedBy
-    @Column(name = "LAST_EDITED_USER_NAME", length = 200, nullable = true)
-    @Comment("수정자명")
-    @Builder.Default
-    String lastEditedUserName = "SYSTEM_USER";
+//    @LastModifiedBy
+//    @Column(name = "LAST_EDITED_USER_NAME", length = 200, nullable = true)
+//    @Comment("수정자명")
+//    @Builder.Default
+//    String lastEditedUserName = "SYSTEM_USER";
 
 }
