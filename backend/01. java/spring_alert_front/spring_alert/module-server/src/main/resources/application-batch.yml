@@ -1,0 +1,7 @@
+batch:
+  notification:
+    delete-cron: 0 0 3 * * *
+
+alert:
+  front:
+    delete-month: 3

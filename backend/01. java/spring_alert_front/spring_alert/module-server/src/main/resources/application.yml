@@ -11,7 +11,7 @@ spring:
   application:
     name: spring_alert
   profiles:
-    active: default, setting
+    active: default, setting, batch
 
   devtools:
     restart:
@@ -47,4 +47,4 @@ spring:
     init:
       mode: ${setting.database.sql.init.mode:never}
       encoding: UTF-8
-#      data-locations: classpath:data.sql
+      data-locations: classpath:data.sql

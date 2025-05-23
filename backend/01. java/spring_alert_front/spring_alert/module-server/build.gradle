@@ -45,6 +45,7 @@ dependencies {
     implementation(project(":module-common"))
     implementation(project(":module-domain"))
     implementation(project(":module-crosscut"))
+    implementation(project(":module-schedule"))
 
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${mapStructBindingVersion}"

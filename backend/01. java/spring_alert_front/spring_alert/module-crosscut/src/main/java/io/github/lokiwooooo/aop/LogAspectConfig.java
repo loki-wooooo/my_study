@@ -135,11 +135,8 @@ public class LogAspectConfig {
                 .detailType(logDetailType)
                 .content(logContent)
                 .ip(requestIp)
-                .isUse(true)
                 .createdOn(LocalDateTime.now())
-                .createdUserName(userName)
                 .lastEditedOn(LocalDateTime.now())
-                .lastEditedUserName(userName)
                 .build();
 
         Log log = logMapper.toEntity(logDto);

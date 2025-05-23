@@ -18,10 +18,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class CommonDto implements Serializable {
 
-    Boolean isUse;
     LocalDateTime createdOn;
-    String createdUserName;
     LocalDateTime lastEditedOn;
-    String lastEditedUserName;
 
 }

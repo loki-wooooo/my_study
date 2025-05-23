@@ -1,6 +1,7 @@
 package io.github.lokiwooooo.domain.notification.request.entity;
 
 import io.github.lokiwooooo.domain.common.entity.CommonEntity;
+import io.github.lokiwooooo.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -34,10 +35,18 @@ public class NotificationRequest extends CommonEntity {
     @Comment("알림발송등록 PK")
     UUID id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    User user;
+
     @Column(name = "client_type", nullable = false, length = 32)
+    @Comment("알림발송 타입(ex. Web, Moblie 등등")
+    String clientType;
+
+    @Column(name = "request_channel", nullable = false, length = 32)
     @Enumerated(EnumType.STRING)
-    @Comment("알림발송 타입(ex. SMS, E-MAIL, KAKAO_TALK")
-    RequestType clientType;
+    @Comment("알림발송 채널(ex. EMAIL, SMS, KAKAO")
+    RequestChannel requestChannel;
 
     @Column(name = "event_type", nullable = false, length = 64)
     @Comment("알림발송 이벤트 타입(ex. ALERT, ALERT_HISTORY)")
