@@ -1,25 +1,21 @@
-import {createStore} from 'vuex'
-import {fetchNewsList} from '@/api/index.js';
+import Vue from 'vue';
+import Vuex from 'vuex';
+import getters from './getters.js';
+import mutations from './mutations.js';
+import actions from './actions.js';
 
-export const store = createStore({
+Vue.use(Vuex);
+
+export default new Vuex.Store({
+    strict: process.env.NODE_ENV !== 'production',
     state: {
-        news: []
+        news: [],
+        ask: [],
+        jobs: [],
+        user: {},
+        item: {}
     },
-    mutations: {
-        //첫 파라미터는 state
-        SET_NEWS(state, news) {
-            state.news = news;
-        }
-    },
-    actions: {
-        //context를 통해 mutations로 commit 처리
-        FETCH_NEWS: (context) => {
-            fetchNewsList()
-                .then(response => {
-                    context.commit('SET_NEWS', response.data);
-                }).catch(error => {
-                console.error(error);
-            })
-        }
-    },
+    getters,
+    mutations,
+    actions,
 })

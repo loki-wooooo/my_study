@@ -1,17 +1,22 @@
 <template>
   <div>
-    <div :key="user.id" v-for="user in this.$store.state.news">{{ user.title }}</div>
-    News
+    <p v-for="news in this.$store.state.news" :key="news.id">
+      <a :href="news.url">{{ news.title }}</a><br>
+      <small>{{ news.time_ago }} by {{ news.domain }}</small>
+    </p>
   </div>
 </template>
 
 <script>
-
-
 export default {
   created() {
-    //store 사용
-    this.$store.dispatch('FETCH_NEWS');
+    this.$store.dispatch('FETCH_NEWS')
+        .then(() => console.log('success'))
+        .catch(() => console.log('fail'));
   }
 }
 </script>
+
+<style>
+
+</style>
