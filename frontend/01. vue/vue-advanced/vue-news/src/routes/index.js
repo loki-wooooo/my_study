@@ -34,6 +34,10 @@ const routes = [
     component: UserView,
   },
   {
+    path: '/user/:id',
+    component: UserView,
+  },
+  {
     path: '/item',
     component: ItemView,
   }

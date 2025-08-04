@@ -1,7 +1,7 @@
-import { createApp } from 'vue'
+import {createApp} from 'vue'
 import App from './App.vue'
-import routes from '@/routes/index'
-import store from '@/store/index'
+import {routes} from '@/routes/index'
+import {store} from '@/store/index'
 
 const app = createApp(App)
 app.use(routes)     // 라우터 사용
