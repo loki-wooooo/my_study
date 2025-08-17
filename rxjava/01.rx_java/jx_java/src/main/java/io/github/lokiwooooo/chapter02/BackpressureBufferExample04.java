@@ -14,7 +14,7 @@ public class BackpressureBufferExample03 {
         Flowable.interval(1L, TimeUnit.MICROSECONDS)
                 //interval에서 호출 하는 콜백 함수 doOnNext
                 .doOnNext(data -> System.out.println(data))
-                //요청데이터를 드랍
+                //요청데이터를 갖고있다가 최신 데이터 기준으로 넣음
                 .onBackpressureLatest()
                 //스케줄러 챕터에서 이야기 다시함(데이터를 처리하는 스레드를 분리할 수 있음)
                 // buffer의 용량 X, 소비자에서 요청하는 buffer의 개수
