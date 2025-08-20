@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { fetchUser } from '../api/index.js';
+import { fetchUser } from '../src/api/index.js';
 
 export default {
   created() {
