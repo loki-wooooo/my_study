@@ -4,7 +4,7 @@ import io.reactivex.Observable;
 
 import java.util.concurrent.TimeUnit;
 
-public class ObserableTimerExample {
+public class ObservableTimerExample {
 
     public static void main(String[] args) throws Exception {
         Observable<String> observable =
