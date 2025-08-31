@@ -1,18 +1,20 @@
 <template>
   <div>
-    <p v-for="item in this.$store.state.news">
-      <a v-bind:href="item.url">{{ item.title }}</a>
-      <small>{{item.time_ago}} by
-        <router-link v-bind:to="`/user/${item.user}`">{{item.user}}</router-link>
-      </small>
-    </p>
+    <p>name: {{ userInfo.id}}</p>
+    <p>karma: {{ userInfo.karma}}</p>
+    <p>created: {{ userInfo.created  }}</p>
   </div>
 </template>
 
 <script>
-import { fetchUser } from '../src/api/index.js';
+import {fetchUser} from '../src/api/index.js';
 
 export default {
+  computed: {
+    userInfo() {
+      return this.$store.state.user
+    }
+  },
   created() {
     fetchUser('davideast')
         .then(response => console.log(response))
