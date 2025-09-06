@@ -1,7 +1,7 @@
 import os
 
 #openai 키 입력, OpenAI API 키를 환경 변수(os.environ)에 저장
-os.environ["OPEN_API_KEY"] = "sk-proj-111lyzhcDArcsq14TTUOjtLT00Zvg3uS5BThuNDpEhmZ54eEelQXAzp22d3lemJZbv2iXMy-MoKTjT3BlbkFJt5HBN24vLXXO9qMhGxq5kqUFWiprtAlZDclS0VwHGHPzMuGbXZ1aSRkw7stwXWKs9JHBBN778A"
+os.environ["OPEN_API_KEY"] = "sk-proj-1234111lyzhcDArcsq14TTUOjtLT00Zvg3uS5BThuNDpEhmZ54eEelQXAzp22d3lemJZbv2iXMy-MoKTjT3BlbkFJt5HBN24vLXXO9qMhGxq5kqUFWiprtAlZDclS0VwHGHPzMuGbXZ1aSRkw7stwXWKs9JHBBN778A"
 
 # 랭체인을 사용하여 OpenAI의 gpt-4o 모델을 불러오는 클래스
 from langchain_openai import ChatOpenAi
