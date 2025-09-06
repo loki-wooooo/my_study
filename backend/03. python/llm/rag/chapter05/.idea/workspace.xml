@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bc16e4fe-68c6-4035-80a7-ca8f516f49be" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../080413-main.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/5-1.chat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/5-2.rag_chat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/5-3.pdf_chat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/5-4.pdf_rag_chat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/5-5.rag_llm_chat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/5-6.trans_llm_chat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/5-7.mail_llm_chat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/5-8.csv_analysis_llm_chat.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/data/AI.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../chapter5/data/booksv_02.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../rxjava/01.rx_java/jx_java/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../rxjava/01.rx_java/jx_java/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../rxjava/01.rx_java/jx_java/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../rxjava/01.rx_java/jx_java/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../../../rxjava/01.rx_java/jx_java/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../../../../../rxjava/01.rx_java/jx_java/build.gradle" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="31zY64Dr3LwBYAS2pGnjyp8uXCX" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b598e85cdad2-JavaScript-PY-252.25557.130" />
+        <option value="bundled-python-sdk-1bde30d8e611-7b97d883f26b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.25557.130" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bc16e4fe-68c6-4035-80a7-ca8f516f49be" name="Changes" comment="" />
+      <created>1756528190392</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1756528190392</updated>
+      <workItem from="1756530616178" duration="14000" />
+      <workItem from="1756530642962" duration="32000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
