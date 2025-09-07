@@ -1,9 +1,4 @@
-import {
-    fetchNews,
-    fetchAsk,
-    fetchJobs,
-    fetchUserInfo,
-} from '../api/index.js';
+import {fetchAsk, fetchJobs, fetchNews, fetchUserInfo, fetchItem} from '../api/index.js';
 
 export default {
     FETCH_NEWS({ commit }) {
@@ -17,5 +12,8 @@ export default {
     },
     FETCH_USER_INFO({ commit }, name){
         return fetchUserInfo(name).then(response => commit('SET_USER', response.data));
+    },
+    FETCH_ITEM({ commit }, id) {
+        return fetchItem(id).then(response => commit('SET_ITEM', response.data));
     }
 }
