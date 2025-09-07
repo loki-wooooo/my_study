@@ -112,3 +112,14 @@ query = "겨울철 다육이 키우는 방법은?"
 response = qa_chain.invoke(query)
 
 print(response)
+'''
+- question
+    - 사용자가 입력한 질문 문자열입니다.
+    - RetrievalQA를 그대로 쓰면 invoke("...")로 준 문자열이 내부적으로 {"query": "..."}로 정규화되고, 기본 프롬프트에서는 이 값이 {question} 자리에 매핑됩니다.
+    - 딕셔너리로 호출하면 qa_chain.invoke({"query": "..."})의 값이 {question}이 됩니다.
+
+- context
+    - retriever가 query(=사용자 질문)로 검색해 가져온 관련 문서들의 본문(page_content)을 합쳐 만든 문자열입니다.
+    - chain_type="stuff"일 때는 보통 문서들을 적절히 이어붙여 {context}에 주입합니다.
+
+'''
