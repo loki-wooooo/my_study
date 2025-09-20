@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import {fetchUser} from '../src/api/index.js';
+// import {fetchUser} from '../src/api/index.js';
 
 export default {
   computed: {
@@ -16,10 +16,19 @@ export default {
     }
   },
   created() {
-    fetchUser('davideast')
-        .then(response => console.log(response))
-        .catch(error => console.log(error));
+    const username = this.$route.params.id;
+    this.$store.dispatch('FETCH_USER_INFO', username)
   }
+  // computed: {
+  //   userInfo() {
+  //     return this.$store.state.user
+  //   }
+  // },
+  // created() {
+  //   fetchUser('davideast')
+  //       .then(response => console.log(response))
+  //       .catch(error => console.log(error));
+  // }
 }
 </script>
 
