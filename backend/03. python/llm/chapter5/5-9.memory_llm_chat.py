@@ -1,7 +1,6 @@
 import os
 
-os.environ[
-    "OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 
 from langchain_openai import ChatOpenAI
 
@@ -100,4 +99,10 @@ memory = ConversationBufferMemory(
 )
 
 # 문맥을 유지하면서 검색 기능을 추가한 질의응답(QA) 체인 라이브러리
-from
+from langchain.chains import ConversationalRetrievalChain
+retriever = vectorstore.as_retriever()
+qa_chain_memory = ConversationalRetrievalChain.from_llm(
+    llm=llm,
+    retriever=retriever,
+    memory=memory,
+)
