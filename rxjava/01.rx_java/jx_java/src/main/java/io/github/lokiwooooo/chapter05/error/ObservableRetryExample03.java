@@ -26,8 +26,7 @@ public class ObservableRetryExample03 {
                     Thread.sleep(1000L); // 서버쪽 요청시 클라이언트요청을 처리하기 위한 시간이 필요함 > 시간적 여유를 주기 위해 처리
                     return retryCount < MAX_RETRY_COUNT ? true : false;
                 })
-                .onErrorReturn(throwable -> -1L)
-                )
+                .onErrorReturn(throwable -> -1)
                 .subscribe(
                 data -> System.out.println(data),
                 error -> System.out.println("error: " + error.getMessage()),
