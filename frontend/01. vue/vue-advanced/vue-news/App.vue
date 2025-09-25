@@ -1,13 +1,13 @@
 <template>
-  <!--1. Strongly Recommended-->
-  <!-- <Toolbar></Toolbar> -->
-  <!--2. Essential-->
-  <tool-bar></tool-bar>
+    <!--1. Strongly Recommended-->
+    <!-- <Toolbar></Toolbar> -->
+    <!--2. Essential-->
+    <tool-bar></tool-bar>
 
-  <!-- route transition -->
-  <transition name="page">
-    <router-view></router-view>
-  </transition>
+    <!-- route transition -->
+    <transition name="page">
+        <router-view></router-view>
+    </transition>
 
 </template>
 
@@ -17,40 +17,52 @@ import ToolBar from './components/ToolBar.vue';
 
 
 export default {
-  components: {
-    ToolBar,
-  },
-  methods: {
+    components: {
+        ToolBar,
+    },
+    methods: {
 
-    fetchData() {
-      console.log('hello');
+        fetchData() {
+            console.log('hello');
+        }
+
     }
-
-  }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
 }
 
 body {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #42b983;
+}
+
+a.router-link-exact-active {
+    text-decoration: underline;
 }
 
 /*ROUTE TRANSITION*/
 .page-enter-active, .page-leave-active {
-  transition: opacity .5s;
+    transition: opacity .5s;
 }
 
 .page-enter, .page-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 </style>
