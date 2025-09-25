@@ -1,7 +1,7 @@
 <template>
     <div>
         <ul class="news-list">
-            <li v-for="news in this.$store.state.news" :key="news.id" class="post">
+            <li v-for="item in this.$store.state.news" :key="item.id" class="post">
                 <!-- 포인트 입력 -->
                 <div class="points">
                     {{ item.points }}
@@ -10,10 +10,10 @@
                 <!-- 기타 정보 입력 -->
                 <div>
                     <p class="news-title">
-                        <a :href="news.url">{{ news.title }}</a>
+                        <a :href="item.url">{{ item.title }}</a>
                     </p>
-                    <small class="link-text">{{ news.time_ago }} by
-                        <router-link v-bind:to="`/user/${news.user}`">{{ news.user }}</router-link>
+                    <small class="link-text">{{ item.time_ago }} by
+                        <router-link v-bind:to="`/user/${item.user}`">{{ item.user }}</router-link>
                     </small>
                 </div>
             </li>

@@ -1,25 +1,67 @@
 <template>
-  <div>
-    <p v-for="ask in this.$store.state.ask" :key="ask.id">
-<!--      <a :href="ask.url">{{ ask.title }}</a><br>-->
-      <router-link v-bind:to="`/item/${ask.id}`">
-        {{item.title}}
-      </router-link>
-      <small>{{ ask.time_ago }} by {{ ask.user }}</small>
-    </p>
-  </div>
+    <div>
+        <ul class="news-list">
+            <li v-for="item in fetchedAsk" :key="item.id" class="post">
+                <!-- 포인트 입력 -->
+                <div class="points">
+                    {{ item.points }}
+                </div>
+
+                <!-- 기타 정보 입력 -->
+                <div>
+                    <p class="news-title">
+                        <router-link v-bind:to="`/item/${item.id}`">
+                            {{item.title}}
+                        </router-link>
+                    </p>
+                    <small class="link-text">{{ item.time_ago }} by
+                        <router-link v-bind:to="`/user/${item.user}`">{{ item.user }}</router-link>
+                    </small>
+                </div>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
+import {mapState, mapGetters} from 'vuex';
+
 export default {
-  created() {
-    this.$store.dispatch('FETCH_ASK')
-        .then(() => console.log('success'))
-        .catch(() => console.log('fail'));
-  }
+    computed: {
+        ...mapGetters(
+            ['fetchedAsk']
+        )
+    }
 }
 </script>
 
-<style>
+<style scoped>
+.news-list {
+    margin: 0;
+    padding: 0;
+}
 
+.post {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.points {
+    width: 80px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #41b883;
+}
+
+.news-title {
+    margin: 0;
+}
+
+.link-text {
+    color: #999;
+}
 </style>
