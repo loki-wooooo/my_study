@@ -21,7 +21,7 @@ public class AssertValueTest {
         SampleObservable.getCarMakerStream()
                 .filter(carMaker -> carMaker.equals(CarMaker.SAMSUNG))
                 .test()
-                .awaitDone(1L, TimeUnit.MICROSECONDS)
+                .awaitDone(1L, TimeUnit.MICROSECONDS) // 생산자에서 구독한 소비자의 스레드에서 실행이 끝날때까지 기다림,
                 .assertValue(CarMaker.SAMSUNG);
     }
 }
