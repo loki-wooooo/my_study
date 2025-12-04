@@ -16,7 +16,7 @@ public class FluxExample04 {
                 , Flux.just("Reactor")
                 , Mono.just("World")
         )
-                .collectList() // 
+                .collectList() //
                 .subscribe(wordList -> log.info("data: {}", wordList));
     }
 }
