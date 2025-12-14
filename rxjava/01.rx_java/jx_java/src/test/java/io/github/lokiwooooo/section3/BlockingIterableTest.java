@@ -1,0 +1,32 @@
+package io.github.lokiwooooo.section3;
+
+import io.github.lokiwooooo.common.CarMaker;
+import org.junit.Test;
+
+import java.util.Iterator;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+// blockingiterable을 사용한 통지 데이터 테스트 예제
+public class BlockingIterableTest {
+
+    //전체 CarMaker의 요소가 맞는지 모두 테스트한다.
+    @Test
+    public void getCarMakerIterableTest() {
+        //when
+        Iterable<CarMaker> iterable = SampleObservable.getCarMakerStream()
+                .blockingIterable();
+
+        Iterator<CarMaker> iterator = iterable.iterator();
+
+        //when
+        assertThat(iterator.hasNext(), is(true));
+
+        assertThat(iterator.next(), is(CarMaker.HYUNDAE));
+        assertThat(iterator.next(), is(CarMaker.CHEVROLET));
+        assertThat(iterator.next(), is(CarMaker.KIA));
+        assertThat(iterator.next(), is(CarMaker.KMG));
+        assertThat(iterator.next(), is(CarMaker.SAMSUNG));
+    }
+}
