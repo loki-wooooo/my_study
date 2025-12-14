@@ -1,4 +1,4 @@
-package io.github.lokiwooooo.demo.section6.class2;
+package io.github.lokiwooooo.demo.section6.class02;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Sinks;
