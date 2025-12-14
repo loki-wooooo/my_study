@@ -1,10 +1,10 @@
 <template>
   <div>
     <ul class="news-list">
-      <li v-for="item in this.$store.state.news" :key="item.id" class="post">
+      <li v-for="item in listItems" :key="item.id" class="post">
         <!-- 포인트 입력 -->
         <div class="points">
-          {{ item.points }}
+          {{ item.points || 0}}
         </div>
 
         <!-- 기타 정보 입력 -->
@@ -37,7 +37,17 @@ export default {
     }
   },
   computed: {
-    
+      // router에서 나오는 내용 기반으로 데이터를 변경해서 보여줌
+    listItems() {
+        const name = this.$route.name
+        if (name === 'news') {
+            return this.$store.state.news
+        } else if (name === 'ask') {
+            return this.$store.state.ask
+        } else {
+            return this.$store.state.jobs
+        }
+    }
   }
 }
 </script>
