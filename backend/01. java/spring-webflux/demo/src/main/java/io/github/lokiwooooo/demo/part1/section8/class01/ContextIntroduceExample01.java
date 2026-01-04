@@ -1,4 +1,4 @@
-package io.github.lokiwooooo.demo.section8.class01;
+package io.github.lokiwooooo.demo.part1.section8.class01;
 
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;

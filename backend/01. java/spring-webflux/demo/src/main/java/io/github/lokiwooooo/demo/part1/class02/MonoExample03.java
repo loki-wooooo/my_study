@@ -1,4 +1,4 @@
-package io.github.lokiwooooo.demo.section3.class02;
+package io.github.lokiwooooo.demo.part1.class02;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
