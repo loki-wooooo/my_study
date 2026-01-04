@@ -1,4 +1,4 @@
-package io.github.lokiwooooo.demo.section5.class02;
+package io.github.lokiwooooo.demo.part1.class02;
 
 import io.github.lokiwooooo.demo.util.TimeUtil;
 import reactor.core.publisher.Flux;
