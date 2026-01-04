@@ -1,4 +1,4 @@
-package io.github.lokiwooooo.demo.setcion10.class01;
+package io.github.lokiwooooo.demo.part1.setcion10.class01;
 
 import reactor.core.publisher.Flux;
 import reactor.util.function.Tuple2;
