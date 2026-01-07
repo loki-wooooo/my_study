@@ -1,10 +1,10 @@
-package io.github.lokiwooooo.demo.part2.section11.class03;
+package io.github.lokiwooooo.demo.part2.section12.class00;
 
 import io.github.lokiwooooo.demo.part2.section11.class01.SampleData;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 
-import static io.github.lokiwooooo.demo.part2.section11.class03.CoronaVaccineService.isGreaterThan;
+import static io.github.lokiwooooo.demo.part2.section12.class00.CoronaVaccineService.isGreaterThan;
 
 /**
  * 백신의 재고를 기준 이상으로 보유하고 있는 백신만 출력하도록 하는 예제
