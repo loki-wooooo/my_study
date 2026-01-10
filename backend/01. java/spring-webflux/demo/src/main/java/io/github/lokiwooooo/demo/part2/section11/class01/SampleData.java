@@ -39,9 +39,6 @@ public class SampleData {
                     , Tuples.of(2021, 63_364_000L)
             );
 
-    public static Map<Integer, Tuple2<Integer, Long>> getBtcTopPricesPerYearMap() {
-        return btcTopPricesPerYear.stream().collect(Collectors.toMap(t1 -> t1.getT1(), t2 -> t2));
-    }
 
     public static final List<CoronaVaccine> coronaVaccineNames = CoronaVaccine.toList();
 
@@ -70,5 +67,9 @@ public class SampleData {
                     CoronaVaccine.Pfizer, CoronaVaccine.AstraZeneca, CoronaVaccine.Moderna, CoronaVaccine.Janssen, CoronaVaccine.Novavax
             );
         }
+    }
+
+    public static Map<Integer, Tuple2<Integer, Long>> getBtcTopPricesPerYearMap() {
+        return btcTopPricesPerYear.stream().collect(Collectors.toMap(t1 -> t1.getT1(), t2 -> t2));
     }
 }
